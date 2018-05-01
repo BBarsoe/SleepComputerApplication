@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.UserModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,15 +10,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MainController extends Application {
 
+	public static Connection con;
 	private Stage primaryStage;
 	private AnchorPane loginView;
 	private BorderPane mainView;
 	private AnchorPane registerView;
-	public static Connection con;
-
+	private UserModel userModel;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -34,7 +37,7 @@ public class MainController extends Application {
 	}
 
 	private void initDatabaseConnection() {
-		con =  DatabaseController.connect();
+		con = DatabaseController.connect();
 	}
 
 	public void goToLogin() {
@@ -87,5 +90,28 @@ public class MainController extends Application {
 		}
 	}
 
+	public void updateModels(String user_name, String user_pass) {
+		try {
+			String SQL = "SELECT * FROM healthcoordinator WHERE user_id LIKE " + user_name + " AND user_pass LIKE " + user_pass + ";";
 
+			ResultSet rs = con.createStatement().executeQuery(SQL);
+			int numColumns = rs.getMetaData().getColumnCount();
+			String[] resultString = new String[numColumns];
+			while (rs.next()) {
+				for ( int i = 1 ; i <= numColumns ; i++ ) {
+					try {
+						resultString[i - 1] = rs.getObject(i).toString();
+					} catch (NullPointerException e) {
+						resultString[i - 1] = "0";
+					}
+				}
+			}
+			this.userModel = new UserModel(resultString[0],resultString[1],resultString[2],resultString[3]);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL ERROR");
+		}
+
+
+	}
 }

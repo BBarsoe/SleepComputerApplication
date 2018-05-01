@@ -51,6 +51,8 @@ public class LoginController {
 			e.printStackTrace();
 			System.out.println("Brugernavn eller kodeord var forkert");
 		}
+
+		mainController.updateModels(user_name.getText(),user_pass.getText());
 	}
 
 	public void handleRegisterButton (){
