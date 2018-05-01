@@ -53,7 +53,7 @@ public class LoginController {
 
 	}
 
-	public void handleOpretButton (){
+	public void handleRegisterButton (){
 		mainController.goToRegisterView();
 	}
 
