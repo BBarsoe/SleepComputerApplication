@@ -9,7 +9,7 @@
 /build
 /.idea
 /com/.idea
-/com/out
+/com/out/*
 /out
 /.idea
 .externalNativeBuild
