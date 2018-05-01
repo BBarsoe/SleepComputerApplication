@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DatabaseController {
 
 
-	static String dbAddress = "jdbc:mysql://212.10.146.182:3306/test";
+	static String dbAddress = "jdbc:mysql://212.10.146.182:3306/test?autoReconnect=true&useSSL=false";
 	static String dbUsername = "admin";
 	static String dbPassword = "KellePrik134!";
 
