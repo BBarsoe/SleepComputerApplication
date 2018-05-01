@@ -32,7 +32,7 @@ public class MainController extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class
-					.getResource("../view/LoginView.fxml"));
+					.getResource("/LoginView.fxml"));
 			loginView = (AnchorPane) loader.load();
 			Scene scene = new Scene(loginView);
 			primaryStage.setScene(scene);
@@ -50,7 +50,7 @@ public class MainController extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class
-					.getResource("../view/MainView.fxml"));
+					.getResource("/MainView.fxml"));
 			mainView = (BorderPane) loader.load();
 			Scene scene = new Scene(mainView);
 			primaryStage.setScene(scene);
