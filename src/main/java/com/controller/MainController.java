@@ -14,6 +14,8 @@ public class MainController extends Application {
 	private Stage primaryStage;
 	private AnchorPane loginView;
 	private BorderPane mainView;
+	private AnchorPane registerView;
+
 
 	public static void main(String[] args) {
 		launch(args);
@@ -28,7 +30,7 @@ public class MainController extends Application {
 		goToLogin();
 	}
 
-	private void goToLogin () {
+	public void goToLogin() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class
@@ -46,7 +48,22 @@ public class MainController extends Application {
 		}
 	}
 
-	public void goToMainView () {
+	public void goToRegisterView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainController.class.getResource("/RegisterView.fxml"));
+			registerView = (AnchorPane) loader.load();
+			Scene scene = new Scene(registerView);
+			primaryStage.setScene(scene);
+
+			primaryStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void goToMainView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class
@@ -61,4 +78,6 @@ public class MainController extends Application {
 			e.printStackTrace();
 		}
 	}
+
+
 }
