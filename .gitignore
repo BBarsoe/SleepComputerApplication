@@ -6,7 +6,10 @@
 .DS_Store
 /build
 /captures
-/out
 /build
+/.idea
+/com/.idea
+/com/out
+/out
 /.idea
 .externalNativeBuild
