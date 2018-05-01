@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class LoginController {
 
@@ -40,17 +42,18 @@ public class LoginController {
 	}
 
 	public void handleLoginButton () {
-		if ((user_name.getText().equalsIgnoreCase("admin")) && (user_pass.getText().equalsIgnoreCase("admin"))) {
-			/*
-			TODO: Add real login authentication
-			 */
-			System.out.println("LOGIN SUCCESS");
+
+		try {
+			String SQL = "SELECT * FROM healthcoordinator WHERE user_id LIKE "+ user_name.getText() + " AND user_pass LIKE "+ user_pass.getText() + ";";
+
+			mainController.con.createStatement().executeQuery(SQL);
+			System.out.println("Login success");
 			mainController.goToMainView();
-		} else {
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 			System.out.println("Brugernavn eller kodeord var forkert");
-
 		}
-
 	}
 
 	public void handleRegisterButton (){

@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class MainController extends Application {
 
@@ -15,6 +16,7 @@ public class MainController extends Application {
 	private AnchorPane loginView;
 	private BorderPane mainView;
 	private AnchorPane registerView;
+	public static Connection con;
 
 
 	public static void main(String[] args) {
@@ -28,6 +30,11 @@ public class MainController extends Application {
 		this.primaryStage.setResizable(false);
 
 		goToLogin();
+		initDatabaseConnection();
+	}
+
+	private void initDatabaseConnection() {
+		con =  DatabaseController.connect();
 	}
 
 	public void goToLogin() {
