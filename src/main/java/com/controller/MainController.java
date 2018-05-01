@@ -23,6 +23,7 @@ public class MainController extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Sleep Computer Application");
+		this.primaryStage.setResizable(false);
 
 		goToLogin();
 	}
