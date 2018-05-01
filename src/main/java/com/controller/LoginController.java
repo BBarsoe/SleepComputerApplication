@@ -57,4 +57,8 @@ public class LoginController {
 		mainController.goToRegisterView();
 	}
 
+	public void handleOpretButton (){
+	    mainController.goToMainView();
+    }
+
 }

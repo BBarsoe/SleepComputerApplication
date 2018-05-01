@@ -72,6 +72,7 @@ public class MainController extends Application {
 			Scene scene = new Scene(mainView);
 			primaryStage.setScene(scene);
 
+
 			primaryStage.show();
 
 		} catch (IOException e) {
