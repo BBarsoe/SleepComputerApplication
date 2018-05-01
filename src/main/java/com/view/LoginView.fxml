@@ -30,6 +30,6 @@
             <PasswordField fx:id="user_pass" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="LoginButton" layoutX="750.0" layoutY="309.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="52.0" prefWidth="52.0" text="Login" />
+      <Button fx:id="LoginButton" layoutX="750.0" layoutY="309.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="52.0" prefWidth="52.0" text="Login" AnchorPane.bottomAnchor="359.0" AnchorPane.leftAnchor="750.0" AnchorPane.rightAnchor="478.0" AnchorPane.topAnchor="309.0" />
    </children>
 </AnchorPane>

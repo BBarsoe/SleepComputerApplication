@@ -6,6 +6,6 @@
 .DS_Store
 /build
 /captures
-/out/*
-/build/*
+/out
+/build
 .externalNativeBuild
