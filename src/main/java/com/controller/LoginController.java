@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class LoginController {
 
-	private MainController mainController;
+	private static MainController mainController;
 
 
 
