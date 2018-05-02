@@ -1,6 +1,7 @@
 package com.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -13,9 +14,9 @@ public class LoginController {
 	private static MainController mainController;
 
 	@FXML
-	private TextField user_name;
+	private static TextField user_name;
 	@FXML
-	private PasswordField user_pass;
+	private static PasswordField user_pass;
 	@FXML
 	private TextField register_name;
 	@FXML

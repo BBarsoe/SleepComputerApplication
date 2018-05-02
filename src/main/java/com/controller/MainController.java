@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.UserModel;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -65,6 +66,8 @@ public class MainController extends Application {
 			registerView = (AnchorPane) loader.load();
 			Scene scene = new Scene(registerView);
 			primaryStage.setScene(scene);
+			LoginController controller = loader.getController();
+			controller.setMainController(this);
 
 			primaryStage.show();
 
