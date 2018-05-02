@@ -2,9 +2,15 @@ package com.controller;
 
 import com.model.UserModel;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseController {
 
@@ -31,6 +37,5 @@ public class DatabaseController {
 			return null;
 		}
 	}
-
 
 }

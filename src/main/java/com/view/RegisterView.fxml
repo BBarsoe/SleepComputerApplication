@@ -38,11 +38,11 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField id="register_name" GridPane.columnIndex="1" />
-            <TextField id="register_username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <PasswordField id="register_password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="register_name" GridPane.columnIndex="1" />
+            <TextField fx:id="register_username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="register_password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button id="OpretButton" layoutX="578.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleOpretButton" prefHeight="25.0" prefWidth="124.0" text="Opret" />
+      <Button fx:id="OpretButton" layoutX="578.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleOpretButton" prefHeight="25.0" prefWidth="124.0" text="Opret" />
    </children>
 </AnchorPane>
