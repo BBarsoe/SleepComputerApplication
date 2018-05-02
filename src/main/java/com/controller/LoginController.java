@@ -79,15 +79,16 @@ public class LoginController {
                 }else{
                     System.out.println("fejl");
                 }
+            }else{
+                System.out.println("Forkert brugernavn eller kode");
             }
-            System.out.println("Forkert brugernavn eller kode");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Brugernavn eller kodeord var forkert");
 		}
 
-		mainController.updateModels(user_name.getText(),user_pass.getText());
+		//mainController.updateModels(user_name.getText(),user_pass.getText());
 	}
 
 	public void handleRegisterButton (){
