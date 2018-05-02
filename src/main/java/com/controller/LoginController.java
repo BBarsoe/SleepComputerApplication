@@ -48,8 +48,8 @@ public class LoginController {
     }
 
 	public void initialize(){
-//		this.user_name.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
-//		this.user_pass.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
+		this.user_name.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
+		this.user_pass.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
 	}
 
 	public void setMainController(MainController mainController) {
