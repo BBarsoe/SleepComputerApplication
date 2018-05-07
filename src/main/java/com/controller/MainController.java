@@ -7,8 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
+import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,9 +22,11 @@ public class MainController extends Application {
 	public static Connection con;
 	private Stage primaryStage;
 	private AnchorPane loginView;
-	private BorderPane mainView;
+	private GridPane mainView;
 	private AnchorPane registerView;
 	private UserModel userModel;
+	private AnchorPane arrangeMeetingView;
+
 
 	public static void main(String[] args) {
 		launch(args);
@@ -32,6 +37,7 @@ public class MainController extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Sleep Computer Application");
 		this.primaryStage.setResizable(false);
+
 
 		goToLogin();
 		initDatabaseConnection();
@@ -81,10 +87,27 @@ public class MainController extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class
 					.getResource("/MainView.fxml"));
-			mainView = (BorderPane) loader.load();
+			mainView = (GridPane) loader.load();
 			Scene scene = new Scene(mainView);
 			primaryStage.setScene(scene);
 
+
+			primaryStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void goToArrangeMeetingView(){
+		try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainController.class.getResource("/MeetingView.fxml"));
+            arrangeMeetingView = (AnchorPane) loader.load();
+            Scene scene = new Scene(arrangeMeetingView);
+            primaryStage.setScene(scene);
+            MeetingController controller = loader.getController();
+            controller.setMainController(this);
 
 			primaryStage.show();
 

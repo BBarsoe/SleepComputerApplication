@@ -12,7 +12,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DatabaseController {
+class DatabaseController {
 
 
 	static String dbAddress = "jdbc:mysql://212.10.146.182:3306/test?autoReconnect=true&useSSL=false";
@@ -20,7 +20,7 @@ public class DatabaseController {
 	static String dbPassword = "KellePrik134!";
 	static UserModel userModel;
 
-	public static Connection connect(){
+	static Connection connect(){
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		}

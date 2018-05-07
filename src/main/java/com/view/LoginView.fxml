@@ -30,6 +30,6 @@
          </children>
       </GridPane>
       <Button fx:id="LoginButton" layoutX="750.0" layoutY="309.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="52.0" prefWidth="52.0" text="Login" AnchorPane.bottomAnchor="359.0" AnchorPane.leftAnchor="750.0" AnchorPane.rightAnchor="478.0" AnchorPane.topAnchor="309.0" />
-      <Button fx:id="RegisterButton" layoutX="676.0" layoutY="419.0" mnemonicParsing="false" onAction="#handleRegisterButton" text="Registrer" AnchorPane.bottomAnchor="315.0" AnchorPane.leftAnchor="676.0" AnchorPane.rightAnchor="540.0" AnchorPane.topAnchor="380.0" />
+      <Button fx:id="RegisterButton" layoutX="676.0" layoutY="419.0" mnemonicParsing="false" onAction="#handleGoToRegister" text="Registrer" AnchorPane.bottomAnchor="315.0" AnchorPane.leftAnchor="676.0" AnchorPane.rightAnchor="540.0" AnchorPane.topAnchor="380.0" />
    </children>
 </AnchorPane>

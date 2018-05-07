@@ -43,6 +43,7 @@
             <PasswordField fx:id="register_password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="OpretButton" layoutX="578.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleOpretButton" prefHeight="25.0" prefWidth="124.0" text="Opret" />
+      <Button fx:id="OpretButton" layoutX="576.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="25.0" prefWidth="91.0" text="Opret" />
+      <Button fx:id="CancelButton" layoutX="699.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="25.0" prefWidth="91.0" text="Cancel" />
    </children>
 </AnchorPane>
