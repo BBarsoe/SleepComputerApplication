@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class MainController extends Application {
 
 	public static Connection con;
-	private Stage primaryStage;
+	private static Stage primaryStage;
 	private AnchorPane loginView;
 	private GridPane mainView;
 	private AnchorPane registerView;
@@ -102,18 +102,21 @@ public class MainController extends Application {
 	public void goToArrangeMeetingView(){
 		try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainController.class.getResource("/MeetingView.fxml"));
+            loader.setLocation(MainController.class
+					.getResource("/MeetingView.fxml"));
             arrangeMeetingView = (AnchorPane) loader.load();
             Scene scene = new Scene(arrangeMeetingView);
             primaryStage.setScene(scene);
-            MeetingController controller = loader.getController();
-            controller.setMainController(this);
 
 			primaryStage.show();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void Logout(){
+		goToLogin();
 	}
 
 	public void updateModels(String user_name, String user_pass) {

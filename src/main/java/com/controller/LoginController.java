@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.UserModel;
 import com.mysql.cj.xdevapi.SqlStatement;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,15 +43,13 @@ public class LoginController {
     private PasswordField register_password;
 
 
-
-
 	public LoginController () {
 
     }
 
 	public void initialize(){
-		//this.user_name.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
-		//this.user_pass.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
+		this.user_name.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
+		this.user_pass.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
 	}
 
 	public void setMainController(MainController mainController) {
@@ -59,7 +58,7 @@ public class LoginController {
 
 	public void handleLoginButton () {
 			validateID();
-		//mainController.updateModels(user_name.getText(),user_pass.getText());
+		mainController.updateModels(user_name.getText(),user_pass.getText());
 	}
 
 	public void handleGoToRegister (){
