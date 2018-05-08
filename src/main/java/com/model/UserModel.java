@@ -2,16 +2,18 @@ package com.model;
 
 public class UserModel {
 
-	private String user_name;
+	private String user_id;
 	private String user_pass;
 	private String user_firstname;
-	private String user_surname;
 
-	public UserModel(String user_name, String user_pass, String user_firstname, String user_surname){
-		this.user_name = user_name;
+	public UserModel(String user_id, String user_pass, String user_firstname){
+		this.user_id = user_id;
 		this.user_pass = user_pass;
 		this.user_firstname = user_firstname;
-		this.user_surname = user_surname;
+
+		System.out.println(user_id);
+		System.out.println(user_pass);
+		System.out.println(user_firstname);
 
 	}
 }

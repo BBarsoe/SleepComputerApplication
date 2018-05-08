@@ -24,7 +24,6 @@ public class MainController extends Application {
 	private AnchorPane loginView;
 	private GridPane mainView;
 	private AnchorPane registerView;
-	private UserModel userModel;
 	private AnchorPane arrangeMeetingView;
 
 
@@ -119,28 +118,5 @@ public class MainController extends Application {
 		goToLogin();
 	}
 
-	public void updateModels(String user_name, String user_pass) {
-		try {
-			String SQL = "SELECT * FROM healthcoordinator WHERE user_id LIKE " + user_name + " AND user_pass LIKE " + user_pass + ";";
-
-			ResultSet rs = con.createStatement().executeQuery(SQL);
-			int numColumns = rs.getMetaData().getColumnCount();
-			String[] resultString = new String[numColumns];
-			while (rs.next()) {
-				for ( int i = 1 ; i <= numColumns ; i++ ) {
-					try {
-						resultString[i - 1] = rs.getObject(i).toString();
-					} catch (NullPointerException e) {
-						resultString[i - 1] = "0";
-					}
-				}
-			}
-			this.userModel = new UserModel(resultString[0],resultString[1],resultString[2],resultString[3]);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("SQL ERROR");
-		}
-
-
-	}
 }
+

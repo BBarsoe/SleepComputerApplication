@@ -5,6 +5,7 @@ import com.mysql.cj.xdevapi.SqlStatement;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -13,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sun.rmi.runtime.Log;
 
+import javax.activation.DataContentHandler;
+import javax.xml.crypto.Data;
 import javax.xml.transform.Result;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -48,17 +51,17 @@ public class LoginController {
     }
 
 	public void initialize(){
-		this.user_name.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
-		this.user_pass.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
+//		this.user_name.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
+//		this.user_pass.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
 	}
 
 	public void setMainController(MainController mainController) {
 		this.mainController = mainController;
 	}
 
-	public void handleLoginButton () {
+	public void handleLoginButton () throws SQLException {
 			validateID();
-		mainController.updateModels(user_name.getText(),user_pass.getText());
+		DatabaseController.loadModel(user_name.getText());
 	}
 
 	public void handleGoToRegister (){
@@ -66,7 +69,7 @@ public class LoginController {
 
 	}
 
-	public void handleCancelButton(){
+	public void handleCancelButton() throws SQLException {
 	    mainController.goToLogin();
     }
 
@@ -93,7 +96,9 @@ public class LoginController {
                     System.out.println("fejl");
                 }
             } else {
-                System.out.println("Forkert brugernavn eller kode");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Forkert brugernavn eller kode");
+                alert.showAndWait();
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -126,6 +131,7 @@ public class LoginController {
         System.out.println(register_name.getText());
         System.out.println(register_username.getText());
         System.out.println(register_password.getText());
+
         mainController.goToMainView();
     }
 }
