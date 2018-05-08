@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 public class LoginController {
 
 	private static MainController mainController;
-	private Result db_user_id;
+	private static UserModel userModel;
 
 
     @FXML
@@ -62,12 +62,14 @@ public class LoginController {
 	public void handleLoginButton () throws SQLException {
 			validateID();
 		DatabaseController.loadModel(user_name.getText());
+        System.out.println(userModel.getUser_id());
 	}
 
 	public void handleGoToRegister (){
 	    mainController.goToRegisterView();
 
-	}
+
+    }
 
 	public void handleCancelButton() throws SQLException {
 	    mainController.goToLogin();
@@ -112,7 +114,7 @@ public class LoginController {
         ResultSet rs = null;
         String sql_pass = register_password.getText();
 	    try{
-	        String SQL = ("INSERT INTO healthcoordinator (user_pass) VALUES('"+register_password.getText()+"')");
+	        String SQL = ("INSERT INTO healthcoordinator (user_pass,user_firstname) VALUES('"+register_password.getText()+"','"+register_name.getText()+"')");
 
 	        mainController.con.createStatement().executeUpdate(SQL);
 
@@ -120,8 +122,9 @@ public class LoginController {
             st = mainController.con.createStatement();
             rs= st.executeQuery(SQL2);
             if (rs.next()) {
-                System.out.print("Dette er dit id= ");
-                System.out.println(rs.getString(1));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Dette er dit brugerID: " + rs.getString(1));
+                alert.show();
             }
 
         } catch(SQLException e) {

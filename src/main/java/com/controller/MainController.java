@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.UserModel;
+import com.sun.corba.se.spi.servicecontext.UEInfoServiceContext;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -144,7 +145,7 @@ public class MainController extends Application {
 		}
 	}
 
-	public void Logout(){
+    public void Logout(){
 		goToLogin();
 	}
 
