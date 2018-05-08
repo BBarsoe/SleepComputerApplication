@@ -25,6 +25,8 @@ public class MainController extends Application {
 	private GridPane mainView;
 	private AnchorPane registerView;
 	private AnchorPane arrangeMeetingView;
+	private AnchorPane previousSleepView;
+	private AnchorPane sleepHabitsView;
 
 
 	public static void main(String[] args) {
@@ -90,7 +92,6 @@ public class MainController extends Application {
 			Scene scene = new Scene(mainView);
 			primaryStage.setScene(scene);
 
-
 			primaryStage.show();
 
 		} catch (IOException e) {
@@ -106,6 +107,35 @@ public class MainController extends Application {
             arrangeMeetingView = (AnchorPane) loader.load();
             Scene scene = new Scene(arrangeMeetingView);
             primaryStage.setScene(scene);
+
+			primaryStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void goToPreviousSleepView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainController.class.getResource("/PreviousSleepView.fxml"));
+			previousSleepView = (AnchorPane) loader.load();
+			Scene scene = new Scene(previousSleepView);
+			primaryStage.setScene(scene);
+
+			primaryStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void goToSleepHabitsView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainController.class.getResource("/SleepHabitsView.fxml"));
+			previousSleepView = (AnchorPane) loader.load();
+			Scene scene = new Scene(sleepHabitsView);
+			primaryStage.setScene(scene);
 
 			primaryStage.show();
 
