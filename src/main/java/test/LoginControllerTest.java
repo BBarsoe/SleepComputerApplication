@@ -17,11 +17,12 @@ import static org.junit.Assert.*;
 
 public class LoginControllerTest extends ApplicationTest {
 
-	MainController mainController;
+	public MainController mainController;
+	public FXMLLoader fxmlLoader = new FXMLLoader();
 
 	@Override
 	public void start (Stage stage) throws Exception {
-		Parent mainNode = FXMLLoader.load(MainController.class.getResource("LoginView.fxml"));
+		Parent mainNode = fxmlLoader.load(LoginController.class.getResource("LoginView.fxml"));
 		stage.setScene(new Scene(mainNode));
 		stage.show();
 		stage.toFront();
@@ -29,8 +30,7 @@ public class LoginControllerTest extends ApplicationTest {
 
 	@Before
 	public void setUp () throws Exception {
-		this.mainController = new MainController();
-		this.mainController.init();
+
 	}
 
 	@After
