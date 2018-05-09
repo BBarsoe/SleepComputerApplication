@@ -1,31 +1,14 @@
 package com.controller;
 
 import com.model.UserModel;
-import com.mysql.cj.xdevapi.SqlStatement;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
-import javax.activation.DataContentHandler;
-import javax.xml.crypto.Data;
-import javax.xml.transform.Result;
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
 
 
 public class LoginController {
@@ -47,7 +30,6 @@ public class LoginController {
 
 
 	public LoginController () {
-
     }
 
 	public void initialize(){
@@ -62,7 +44,6 @@ public class LoginController {
 	public void handleLoginButton () throws SQLException {
 			validateID();
 		DatabaseController.loadModel(user_name.getText());
-        System.out.println(userModel.getUser_id());
 	}
 
 	public void handleGoToRegister (){

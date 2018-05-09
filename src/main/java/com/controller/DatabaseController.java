@@ -48,7 +48,10 @@ class DatabaseController {
 			user_id = rs.getString(1);
 			user_pass = rs.getString(2);
 			user_firstname = rs.getString(3);
-			userModel = new UserModel(user_id,user_pass,user_firstname);
+			userModel = new UserModel();
+			userModel.setUser_id(user_id);
+			userModel.setUser_pass(user_pass);
+			userModel.setUser_firstname(user_firstname);
 		} else {
 			System.out.println("fejl");
 		}
@@ -70,7 +73,7 @@ class DatabaseController {
 					}
 				}
 			}
-			userModel = new UserModel(resultString[0], resultString[1], resultString[2]);
+			//userModel = new UserModel(resultString[0], resultString[1], resultString[2]);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
