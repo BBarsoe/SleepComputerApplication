@@ -13,7 +13,6 @@ import java.sql.Statement;
 public class LoginController {
 
 	private static MainController mainController;
-	private static UserModel userModel;
 
 
     @FXML
@@ -27,13 +26,11 @@ public class LoginController {
     @FXML
     private PasswordField register_password;
     @FXML
-	private Button LoginButton = new Button();
+    private Button LoginButton = new Button();
 
 
-	public LoginController () {
-    }
-	public void initialize(){
-		LoginButton.setDefaultButton(true);
+    public void initialize(){
+        LoginButton.setDefaultButton(true);
 	}
 
 	public void setMainController(MainController mainController) {
@@ -51,7 +48,7 @@ public class LoginController {
 
     }
 
-	public void handleCancelButton() throws SQLException {
+	public void handleCancelButton() {
 	    mainController.goToLogin();
     }
 
@@ -90,27 +87,10 @@ public class LoginController {
     }
 
 	public void handleRegister (){
-        Statement st = null;
-        ResultSet rs = null;
-        String sql_pass = register_password.getText();
-	    try{
-	        String SQL = ("INSERT INTO healthcoordinator (user_pass,user_firstname) VALUES('"+register_password.getText()+"','"+register_name.getText()+"')");
+        String register_pass = register_password.getText();
+        String register_firstname = register_name.getText();
+        DatabaseController.updateModel(register_pass,register_firstname);
 
-	        mainController.con.createStatement().executeUpdate(SQL);
-
-            String SQL2 = ("SELECT user_id FROM healthcoordinator WHERE user_pass = '"+sql_pass+"'");
-            st = mainController.con.createStatement();
-            rs= st.executeQuery(SQL2);
-            if (rs.next()) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("Dette er dit brugerID: " + rs.getString(1));
-                alert.show();
-            }
-
-        } catch(SQLException e) {
-	        e.printStackTrace();
-            System.out.println("Fejl");
-        }
         System.out.println(register_name.getText());
         System.out.println(register_username.getText());
         System.out.println(register_password.getText());

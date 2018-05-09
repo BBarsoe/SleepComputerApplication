@@ -1,3 +1,5 @@
+import javafx.scene.control.Alert;
+
 import java.sql.*;
 
 class DatabaseController {
@@ -39,32 +41,33 @@ class DatabaseController {
 			user_id = rs.getString(1);
 			user_pass = rs.getString(2);
 			user_firstname = rs.getString(3);
-			userModel = new UserModel();
-			userModel.setUser_id(user_id);
-			userModel.setUser_pass(user_pass);
-			userModel.setUser_firstname(user_firstname);
+			new UserModel().setUser_id(user_id);
+			new UserModel().setUser_pass(user_pass);
+			new UserModel().setUser_firstname(user_firstname);
+			System.out.println(new UserModel().getUser_id());
+			System.out.println(new UserModel().getUser_pass());
+			System.out.println(new UserModel().getUser_firstname());
 		} else {
 			System.out.println("fejl");
 		}
 	}
 
-	static void updateModel(String user_id, String user_pass) {
+	static void updateModel(String user_pass, String user_firstname) {
+		Statement st = null;
+		ResultSet rs = null;
+		String sql_pass = user_pass;
 		try {
-			String SQL = "SELECT * FROM healthcoordinator WHERE user_id LIKE " + user_id + " AND user_pass LIKE " + user_pass + ";";
+			String SQL = ("INSERT INTO healthcoordinator (user_pass,user_firstname) VALUES('"+user_pass+"','"+user_firstname+"')");
+			connect().createStatement().executeUpdate(SQL);
 
-			ResultSet rs = connect().createStatement().executeQuery(SQL);
-			int numColumns = rs.getMetaData().getColumnCount();
-			String[] resultString = new String[numColumns];
-			while (rs.next()) {
-				for (int i = 1; i <= numColumns; i++) {
-					try {
-						resultString[i - 1] = rs.getObject(i).toString();
-					} catch (NullPointerException e) {
-						resultString[i - 1] = "0";
-					}
-				}
+			String SQL2 = ("SELECT user_id FROM healthcoordinator WHERE user_pass = '"+sql_pass+"'");
+			st = connect().createStatement();
+			rs = st.executeQuery(SQL2);
+			if (rs.next()) {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setContentText("Dette er dit brugerID: " + rs.getString(1));
+				alert.show();
 			}
-			//userModel = new UserModel(resultString[0], resultString[1], resultString[2]);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");

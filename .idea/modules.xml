@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.iml" filepath="$PROJECT_DIR$/.idea/modules/com.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.iml" filepath="$PROJECT_DIR$/.idea/modules/com.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com_main.iml" filepath="$PROJECT_DIR$/.idea/modules/com_main.iml" group="com" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com_main.iml" filepath="$PROJECT_DIR$/.idea/modules/com_main.iml" group="com" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com_test.iml" filepath="$PROJECT_DIR$/.idea/modules/com_test.iml" group="com" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com_test.iml" filepath="$PROJECT_DIR$/.idea/modules/com_test.iml" group="com" />
     </modules>
   </component>
