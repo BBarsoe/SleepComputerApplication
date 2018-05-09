@@ -2,35 +2,54 @@ package com.controller;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.stage.Stage;
-import java.io.IOException;
+import java.net.URL;
+import javafx.scene.control.TextField;
+import java.util.ResourceBundle;
 
 
-public class SleepController {
+public class SleepController implements Initializable {
+    ObservableList<String> list = FXCollections.observableArrayList();
 
     @FXML
-    private ChoiceBox countChoiceBox;
+    public ChoiceBox<String> elevList;
 
-    public void onClickChoiceBox(ActionEvent actionEvent) {
+    @FXML
+    private TextField screen;
 
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("PreviousSleepView.fxml"));
-            Stage newStage = new Stage();
-            newStage.setTitle("Change item's count");
-            newStage.setScene(new Scene(root, 320, 240));
-            newStage.show();
-            countChoiceBox = new ChoiceBox();
-            countChoiceBox.setItems(FXCollections.observableArrayList("Alle","Anne","Allan"));
+    //@Override
+    //public void initilize(URL, url, ResourceBundle rb) {
+    //   loadData();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+    // }
+    private void loadData() {
+        list.removeAll(list);
+        String a = "Alle";
+        String b = "Anne";
+        String c = "Allan";
+        list.addAll(a, b, c);
+        elevList.getItems().addAll(list);
+    }
+
+    @FXML
+    private void displayValue(ActionEvent event) {
+        String elev = elevList.getValue();
+
+        if (elev == null) {
+            screen.setText("Elev ikke valgt");
+        } else {
+            screen.setText("Du har valgt elev" + elev);
         }
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadData();
+    }
 }
+
 
 
