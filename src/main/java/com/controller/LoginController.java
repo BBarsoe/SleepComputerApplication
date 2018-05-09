@@ -1,10 +1,9 @@
-package com.controller;
-
-import com.model.UserModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,14 +26,14 @@ public class LoginController {
     private TextField register_username;
     @FXML
     private PasswordField register_password;
+    @FXML
+	private Button LoginButton = new Button();
 
 
 	public LoginController () {
     }
-
 	public void initialize(){
-//		this.user_name.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
-//		this.user_pass.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { handleLoginButton(); } });
+		LoginButton.setDefaultButton(true);
 	}
 
 	public void setMainController(MainController mainController) {

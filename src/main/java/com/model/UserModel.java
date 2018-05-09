@@ -1,6 +1,3 @@
-package com.model;
-
-
 public class UserModel {
 
     private String user_id;

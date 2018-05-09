@@ -1,5 +1,3 @@
-package com.controller;
-
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.collections.ObservableList;
