@@ -22,8 +22,6 @@ public class LoginController {
     @FXML
     private TextField register_name;
     @FXML
-    private TextField register_username;
-    @FXML
     private PasswordField register_password;
     @FXML
     private Button LoginButton = new Button();
@@ -39,7 +37,7 @@ public class LoginController {
 
 	public void handleLoginButton () throws SQLException {
 			validateID();
-            DatabaseController.loadModel(user_name.getText());
+            DatabaseController.loadUserModel(user_name.getText());
 	}
 
 	public void handleGoToRegister (){

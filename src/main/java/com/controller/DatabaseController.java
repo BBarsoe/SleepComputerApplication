@@ -27,7 +27,7 @@ class DatabaseController {
 		}
 	}
 
-	static void loadModel(String user_id) throws SQLException {
+	static void loadUserModel(String user_id) throws SQLException {
 		Statement st = null;
 		ResultSet rs = null;
 		String user_pass;
@@ -67,7 +67,7 @@ class DatabaseController {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setContentText("Dette er dit brugerID: " + rs.getString(1));
 				alert.show();
-				loadModel(rs.getString(1));
+				loadUserModel(rs.getString(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
