@@ -143,6 +143,9 @@ public class MainController extends Application {
 	}
 
     public void Logout(){
+		new UserModel().setUser_id(null);
+		new UserModel().setUser_firstname(null);
+		new UserModel().setUser_pass(null);
 		goToLogin();
 	}
 
