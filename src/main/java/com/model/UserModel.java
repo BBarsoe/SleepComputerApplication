@@ -1,5 +1,3 @@
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 public class UserModel {
 
@@ -7,6 +5,15 @@ public class UserModel {
     private static String user_pass;
     private static String user_firstname;
 
+    /*public class user_id {
+        public String getUser_id() {
+            return user_id;
+        }
+        public void setUser_id(String user_id){
+            UserModel.user_id = user_id;
+        }
+
+    }*/
 
     public void setUser_id(String user_id) {
         UserModel.user_id = user_id;
@@ -20,10 +27,9 @@ public class UserModel {
         UserModel.user_firstname = user_firstname;
     }
 
-    public String getUser_id() {
+   public String getUser_id() {
         return user_id;
     }
-
 
     public String getUser_pass() {
         return user_pass;
@@ -32,4 +38,6 @@ public class UserModel {
     public String getUser_firstname() {
         return user_firstname;
     }
+
 }
+
