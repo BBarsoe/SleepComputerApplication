@@ -84,7 +84,7 @@ public class LoginController {
 
     }
 
-	public void handleRegister (){
+	public void handleRegister () throws SQLException {
         String register_pass = register_password.getText();
         String register_firstname = register_name.getText();
         DatabaseController.updateModel(register_pass,register_firstname);

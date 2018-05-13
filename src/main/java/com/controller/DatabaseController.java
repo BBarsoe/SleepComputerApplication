@@ -27,6 +27,33 @@ class DatabaseController {
 		}
 	}
 
+	static void loadSleepModel(String student_id) throws SQLException {
+		Statement st = null;
+		ResultSet rs = null;
+		Date sleep_date;
+		Date awoke_date;
+		Time sleep_time;
+		Time awoke_time;
+
+		String SQL = ("SELECT * FROM sleepdata WHERE student_id= '"+student_id+"'");
+		connect().createStatement().executeQuery(SQL);
+		st = connect().createStatement();
+		rs = st.executeQuery(SQL);
+		if (rs.next()) {
+			student_id = rs.getString(1);
+			sleep_date = rs.getDate(2); // retunere dato
+			sleep_time = rs.getTime(2); // retunere tiden
+			awoke_date = rs.getDate(3);
+			awoke_time = rs.getTime(3);
+			new SleepModel().setStudent_id(student_id);
+			new SleepModel().setSleep_time(sleep_time);
+			new SleepModel().setAwoke_time(awoke_time);
+		} else {
+			System.out.println("fejl");
+		}
+
+	}
+
 	static void loadUserModel(String user_id) throws SQLException {
 		Statement st = null;
 		ResultSet rs = null;
