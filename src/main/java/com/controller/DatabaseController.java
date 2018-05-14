@@ -29,7 +29,7 @@ class DatabaseController {
 		}
 	}
 
-	static void loadSleepModel(String student_id) throws SQLException {
+	static void loadSleepModel(String student_id) {
 		Statement st = null;
 		ResultSet rs = null;
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -58,10 +58,10 @@ class DatabaseController {
 		}
 	}
 
-	static void loadStudentListModel() throws SQLException {
+	static void loadStudentListModel() {
 		Statement st = null;
 		ResultSet rs = null;
-		ArrayList<String> studentList = new ArrayList<>();
+		ArrayList<String> studentListModels = new ArrayList<>();
 		try {
 
 			String SQL = ("SELECT student_id FROM student WHERE student_consent = 1");
@@ -70,13 +70,13 @@ class DatabaseController {
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
 				String studentlist= rs.getString(1);
-				for (int i = 0; i < studentlist.length(); i++) {
+				//for (int i = 0; i < studentlist.length(); i++) {
 					String student = rs.getString(1);
-					studentList.add(student);
-					System.out.println(studentlist);
-				}
-			}
+					studentListModels.add(student);
+				//}
 
+			}
+			StudentListModel.StudentList_id = studentListModels;
 		}catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
@@ -85,7 +85,7 @@ class DatabaseController {
 	}
 
 
-	static void loadUserModel(String user_id) throws SQLException {
+	static void loadUserModel(String user_id) {
 		Statement st = null;
 		ResultSet rs = null;
 		String user_pass;

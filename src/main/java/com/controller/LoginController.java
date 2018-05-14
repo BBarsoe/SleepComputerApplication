@@ -38,7 +38,6 @@ public class LoginController {
 	public void handleLoginButton () throws SQLException {
 			validateID();
             DatabaseController.loadUserModel(user_name.getText());
-            DatabaseController.loadStudentListModel();
 	}
 
 	public void handleGoToRegister (){

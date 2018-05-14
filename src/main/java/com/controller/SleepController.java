@@ -8,6 +8,7 @@ import java.net.URL;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -25,13 +26,11 @@ public class SleepController implements Initializable {
     //   loadData();
 
     // }
-    private void loadData() {
+    private void loadData() throws SQLException {
         list.removeAll(list);
-        String a = "Alle";
-        String b = "Anne";
-        String c = "Allan";
-        String d = "9";
-        list.addAll(a, b, c, d);
+        DatabaseController.loadStudentListModel();
+        ArrayList<String> studentList = StudentListModel.StudentList_id;
+        list.addAll(studentList);
         elevList.getItems().addAll(list);
     }
 
@@ -50,7 +49,11 @@ public class SleepController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadData();
+        try {
+            loadData();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

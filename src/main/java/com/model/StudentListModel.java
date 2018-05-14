@@ -1,16 +1,8 @@
-import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentListModel {
-    public static class Student {
-        private String student_id;
+    static ArrayList<String> StudentList_id;
 
-        public String getStudent_id() {
-            return student_id;
-        }
-
-        public void setStudent_id(String student_id) {
-            this.student_id = student_id;
-        }
-    }
 
 }
