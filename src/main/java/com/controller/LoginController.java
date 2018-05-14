@@ -38,6 +38,7 @@ public class LoginController {
 	public void handleLoginButton () throws SQLException {
 			validateID();
             DatabaseController.loadUserModel(user_name.getText());
+            DatabaseController.loadStudentListModel();
 	}
 
 	public void handleGoToRegister (){
@@ -84,7 +85,7 @@ public class LoginController {
 
     }
 
-	public void handleRegister () throws SQLException {
+	public void handleRegister () {
         String register_pass = register_password.getText();
         String register_firstname = register_name.getText();
         DatabaseController.updateModel(register_pass,register_firstname);

@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import java.net.URL;
 import javafx.scene.control.TextField;
+
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -28,18 +30,21 @@ public class SleepController implements Initializable {
         String a = "Alle";
         String b = "Anne";
         String c = "Allan";
-        list.addAll(a, b, c);
+        String d = "9";
+        list.addAll(a, b, c, d);
         elevList.getItems().addAll(list);
     }
 
     @FXML
-    private void displayValue(ActionEvent event) {
+    private void displayValue(ActionEvent event) throws SQLException {
         String elev = elevList.getValue();
 
         if (elev == null) {
             screen.setText("Elev ikke valgt");
         } else {
-            screen.setText("Du har valgt elev" + elev);
+            screen.setText("Du har valgt elev " + elev);
+            DatabaseController.loadSleepModel(elev);
+
         }
     }
 

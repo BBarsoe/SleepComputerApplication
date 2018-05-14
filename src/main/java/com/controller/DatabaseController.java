@@ -1,6 +1,12 @@
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import com.mysql.cj.x.protobuf.MysqlxExpr;
 import javafx.scene.control.Alert;
 
+import java.lang.reflect.Array;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 class DatabaseController {
 
@@ -30,53 +36,85 @@ class DatabaseController {
 	static void loadSleepModel(String student_id) throws SQLException {
 		Statement st = null;
 		ResultSet rs = null;
-		Date sleep_date;
-		Date awoke_date;
-		Time sleep_time;
-		Time awoke_time;
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.util.Date dt = new java.util.Date();
+		String awoke_time = sdf.format(dt);
+		String sleep_time = sdf.format(dt);
+		try {
 
-		String SQL = ("SELECT * FROM sleepdata WHERE student_id= '"+student_id+"'");
-		connect().createStatement().executeQuery(SQL);
-		st = connect().createStatement();
-		rs = st.executeQuery(SQL);
-		if (rs.next()) {
-			student_id = rs.getString(1);
-			sleep_date = rs.getDate(2); // retunere dato
-			sleep_time = rs.getTime(2); // retunere tiden
-			awoke_date = rs.getDate(3);
-			awoke_time = rs.getTime(3);
-			new SleepModel().setStudent_id(student_id);
-			new SleepModel().setSleep_time(sleep_time);
-			new SleepModel().setAwoke_time(awoke_time);
-		} else {
-			System.out.println("fejl");
+			String SQL = ("SELECT * FROM sleepdata WHERE student_id= '" + student_id + "'");
+			connect().createStatement().executeQuery(SQL);
+			st = connect().createStatement();
+			rs = st.executeQuery(SQL);
+			if (rs.next()) {
+				student_id = rs.getString(1);
+				sleep_time = rs.getString(2);
+				awoke_time = rs.getString(3);
+				new SleepModel().setStudent_id(student_id);
+				new SleepModel().setSleep_time(sleep_time);
+				new SleepModel().setAwoke_time(awoke_time);
+			} else {
+				System.out.println("fejl");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL ERROR");
+		}
+	}
+
+	static void loadStudentListModel() throws SQLException {
+		Statement st = null;
+		ResultSet rs = null;
+		List<String> studentList = new ArrayList<>();
+		try {
+
+			String SQL = ("SELECT student_id FROM student");
+			connect().createStatement().executeQuery(SQL);
+			st = connect().createStatement();
+			rs = st.executeQuery(SQL);
+			if (rs.next()) {
+				/*for (int i = 0; i < 25; i++) {
+					String student = rs.getString(1);
+					studentList.add(student);
+				}*/
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL ERROR");
 		}
 
 	}
+
 
 	static void loadUserModel(String user_id) throws SQLException {
 		Statement st = null;
 		ResultSet rs = null;
 		String user_pass;
 		String user_firstname;
+		try {
 
-		String SQL = ("SELECT * FROM healthcoordinator WHERE user_id= '"+user_id+"'");
-		connect().createStatement().executeQuery(SQL);
-		st = connect().createStatement();
-		rs = st.executeQuery(SQL);
-		if (rs.next()) {
-			user_id = rs.getString(1);
-			user_pass = rs.getString(2);
-			user_firstname = rs.getString(3);
-			new UserModel().setUser_id(user_id);
-			new UserModel().setUser_pass(user_pass);
-			new UserModel().setUser_firstname(user_firstname);
-			System.out.println(new UserModel().getUser_id());
-			System.out.println(new UserModel().getUser_pass());
-			System.out.println(new UserModel().getUser_firstname());
-		} else {
-			System.out.println("fejl");
+			String SQL = ("SELECT * FROM healthcoordinator WHERE user_id= '" + user_id + "'");
+			connect().createStatement().executeQuery(SQL);
+			st = connect().createStatement();
+			rs = st.executeQuery(SQL);
+			if (rs.next()) {
+				user_id = rs.getString(1);
+				user_pass = rs.getString(2);
+				user_firstname = rs.getString(3);
+				new UserModel().setUser_id(user_id);
+				new UserModel().setUser_pass(user_pass);
+				new UserModel().setUser_firstname(user_firstname);
+				System.out.println(new UserModel().getUser_id());
+				System.out.println(new UserModel().getUser_pass());
+				System.out.println(new UserModel().getUser_firstname());
+			} else {
+				System.out.println("fejl");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL ERROR");
 		}
+
 	}
 
 	static void updateModel(String user_pass, String user_firstname) {

@@ -3,9 +3,9 @@ import java.util.Date;
 
 public class SleepModel {
 
-    private String student_id;
-    private Date sleep_time;
-    private Date awoke_time;
+    private static String student_id;
+    private static String sleep_time;
+    private static String awoke_time;
     private Integer sleep_quality;
     private Integer caffeine_intake;
     private Integer alcohol_intake;
@@ -24,19 +24,19 @@ public class SleepModel {
         this.student_id = student_id;
     }
 
-    public Date getSleep_time() {
+    public String getSleep_time() {
         return sleep_time;
     }
 
-    public void setSleep_time(Date sleep_time) {
+    public void setSleep_time(String sleep_time) {
         this.sleep_time = sleep_time;
     }
 
-    public Date getAwoke_time() {
+    public String getAwoke_time() {
         return awoke_time;
     }
 
-    public void setAwoke_time(Date awoke_time) {
+    public void setAwoke_time(String awoke_time) {
         this.awoke_time = awoke_time;
     }
 
