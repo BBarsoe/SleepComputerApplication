@@ -1,3 +1,5 @@
+import com.mysql.cj.protocol.ResultStreamer;
+import com.mysql.cj.protocol.Resultset;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
@@ -57,6 +59,26 @@ class DatabaseController {
 			System.out.println("SQL ERROR");
 		}
 	}
+
+	static void loadMeetingModel() {
+	    Statement st = null;
+        ResultSet rs = null;
+        ArrayList<String> meetingModels = new ArrayList<>();
+        try {
+            String SQL = ("SELECT * FROM meeting WHERE user_id = 0");
+            connect().createStatement().executeQuery(SQL);
+            st = connect().createStatement();
+            rs = st.executeQuery(SQL);
+            while (rs.next()) {
+                String student_id = rs.getString(2);
+                meetingModels.add(student_id);
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL ERROR");
+        }
+    }
 
 	static void loadStudentListModel() {
 		Statement st = null;
