@@ -1,11 +1,7 @@
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
-import com.mysql.cj.x.protobuf.MysqlxExpr;
 import javafx.scene.control.Alert;
 
-import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 
 class DatabaseController {
@@ -65,19 +61,22 @@ class DatabaseController {
 	static void loadStudentListModel() throws SQLException {
 		Statement st = null;
 		ResultSet rs = null;
-		List<String> studentList = new ArrayList<>();
+		ArrayList<String> studentList = new ArrayList<>();
 		try {
 
-			String SQL = ("SELECT student_id FROM student");
+			String SQL = ("SELECT student_id FROM student WHERE student_consent = 1");
 			connect().createStatement().executeQuery(SQL);
 			st = connect().createStatement();
 			rs = st.executeQuery(SQL);
-			if (rs.next()) {
-				/*for (int i = 0; i < 25; i++) {
+			while (rs.next()) {
+				String studentlist= rs.getString(1);
+				for (int i = 0; i < studentlist.length(); i++) {
 					String student = rs.getString(1);
 					studentList.add(student);
-				}*/
+					System.out.println(studentlist);
+				}
 			}
+
 		}catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
