@@ -1,15 +1,28 @@
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import java.net.URL;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.OffsetDateTime;
+import java.util.Date;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.sql.SQLException;
+
+
+//import static java.time.OffsetDateTime.now;
+import static java.time.LocalDate.*;
+
 
 
 public class SleepController implements Initializable {
@@ -45,6 +58,33 @@ public class SleepController implements Initializable {
             DatabaseController.loadSleepModel(elev);
 
         }
+    }
+
+
+    @FXML
+    public DatePicker startDatePicker;
+
+    @FXML
+    public DatePicker endDatePicker;
+
+    @FXML
+    public Label fromLabel;
+
+    @FXML
+    public Label toLabel;
+
+    public void ShowDate(ActionEvent event) {
+        startDatePicker = new DatePicker();
+        endDatePicker = new DatePicker();
+        LocalDate today = LocalDate.of(2018, Month.MAY, 14);
+        LocalDate localDate = today.minusWeeks(2);
+
+       // LocalDate today = LocalDate.now();
+       // LocalDate weeks = today.minusWeeks(1);
+
+       // startDatePicker.setValue(startDatePicker.getValue(now()).minusWeeks(2));
+        //endDatePicker.setValue(today);
+
     }
 
     @Override

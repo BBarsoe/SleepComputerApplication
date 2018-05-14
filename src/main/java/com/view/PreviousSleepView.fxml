@@ -12,15 +12,27 @@
    <children>
       <Button layoutX="419.0" layoutY="321.0" mnemonicParsing="false" onAction="#displayValue" text="OK" />
       <Button fx:id="returnButton" layoutX="334.0" layoutY="321.0" mnemonicParsing="false" text="Tilbage" />
-      <ChoiceBox fx:id="elevList" layoutX="34.0" layoutY="187.0" minWidth="0.0" prefHeight="35.0" prefWidth="150.0" />
-      <Label layoutX="42.0" layoutY="163.0" prefHeight="17.0" prefWidth="82.0" text="Elevliste">
+      <ChoiceBox fx:id="elevList" layoutX="34.0" layoutY="163.0" minWidth="0.0" prefHeight="35.0" prefWidth="150.0" />
+      <Label layoutX="34.0" layoutY="139.0" prefHeight="17.0" prefWidth="82.0" text="Elevliste">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="34.0" layoutY="77.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Se individdata" />
-      <Button layoutX="230.0" layoutY="77.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" text="Se populationsdata" />
-      <DatePicker layoutX="235.0" layoutY="187.0" prefHeight="35.0" prefWidth="162.0" />
-      <TextField fx:id="screen" layoutX="34.0" layoutY="256.0" prefHeight="45.0" prefWidth="362.0" />
+      <Button layoutX="34.0" layoutY="60.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Se individdata" />
+      <Button layoutX="240.0" layoutY="60.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" text="Se populationsdata" />
+      <DatePicker fx:id="startDatePicker" layoutX="246.0" layoutY="164.0" prefHeight="35.0" prefWidth="162.0" />
+      <TextField fx:id="screen" layoutX="34.0" layoutY="264.0" prefHeight="45.0" prefWidth="362.0" />
+      <DatePicker fx:id="endDatePicker" layoutX="246.0" layoutY="211.0" prefHeight="35.0" prefWidth="162.0" />
+      <Label layoutX="249.0" layoutY="142.0" text="Vælg datointervalg" />
+      <Label fx:id="fromLabel" layoutX="215.0" layoutY="173.0" text="Fra">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="toLabel" layoutX="217.0" layoutY="220.0" text="Til">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
