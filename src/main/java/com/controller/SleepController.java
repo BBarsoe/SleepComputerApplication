@@ -1,9 +1,10 @@
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -11,56 +12,17 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.OffsetDateTime;
-import java.util.Date;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.sql.SQLException;
 
 
 //import static java.time.OffsetDateTime.now;
-import static java.time.LocalDate.*;
-
 
 
 public class SleepController implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList();
-
-    @FXML
-    public ChoiceBox<String> elevList;
-
-    @FXML
-    private TextField screen;
-
-    //@Override
-    //public void initilize(URL, url, ResourceBundle rb) {
-    //   loadData();
-
-    // }
-    private void loadData() throws SQLException {
-        list.removeAll(list);
-        DatabaseController.loadStudentListModel();
-        ArrayList<String> studentList = StudentListModel.StudentList_id;
-        list.addAll(studentList);
-        elevList.getItems().addAll(list);
-    }
-
-    @FXML
-    private void displayValue(ActionEvent event) throws SQLException {
-        String elev = elevList.getValue();
-
-        if (elev == null) {
-            screen.setText("Elev ikke valgt");
-        } else {
-            screen.setText("Du har valgt elev " + elev);
-            DatabaseController.loadSleepModel(elev);
-
-        }
-    }
-
-
     @FXML
     public DatePicker startDatePicker;
 
@@ -72,6 +34,49 @@ public class SleepController implements Initializable {
 
     @FXML
     public Label toLabel;
+    @FXML
+    public ChoiceBox<String> elevList;
+
+    @FXML
+    private TextField screen;
+
+    @FXML
+    private BarChart sleepData;
+
+    //@Override
+    //public void initilize(URL, url, ResourceBundle rb) {
+    //   loadData();
+
+    // }
+    private void loadData() throws SQLException {
+        list.removeAll(list);
+        DatabaseController.loadStudentListModel();
+        ArrayList<String> studentList = StudentListModel.studentList_id;
+        list.addAll(studentList);
+        elevList.getItems().addAll(list);
+    }
+
+    @FXML
+    private void displayValue(ActionEvent event) throws SQLException {
+        String elev = elevList.getValue();
+
+        if (elev != null) {
+         if ((String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
+             DatabaseController.loadSleepModel(elev);
+             //XYChart.Series set1 = new XYChart.Series<>();
+
+             //String sleep_time = new SleepModel().getSleep_time();
+             //set1.getData().add(sleep_time);
+             System.out.println(new SleepModel().getSleep_time());
+             System.out.println(new SleepModel().getAwoke_time());
+         } else{
+             screen.setText("Datointerval ikke valgt");
+                      }
+        }else{
+            screen.setText("Elev ikke valgt");
+        }
+    }
+
 
     public void ShowDate(ActionEvent event) {
         startDatePicker = new DatePicker();
