@@ -2,6 +2,7 @@ import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 class DatabaseController {
@@ -58,6 +59,7 @@ class DatabaseController {
 		}
 	}
 
+
 	static void loadStudentListModel() {
 		Statement st = null;
 		ResultSet rs = null;
@@ -69,14 +71,11 @@ class DatabaseController {
 			st = connect().createStatement();
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
-				String studentlist= rs.getString(1);
-				//for (int i = 0; i < studentlist.length(); i++) {
 					String student = rs.getString(1);
 					studentListModels.add(student);
-				//}
 
 			}
-			StudentListModel.StudentList_id = studentListModels;
+			StudentListModel.studentList_id = studentListModels;
 		}catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
