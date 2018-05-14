@@ -122,9 +122,9 @@ class DatabaseController {
 				new UserModel().setUser_id(user_id);
 				new UserModel().setUser_pass(user_pass);
 				new UserModel().setUser_firstname(user_firstname);
-				System.out.println(new UserModel().getUser_id());
-				System.out.println(new UserModel().getUser_pass());
-				System.out.println(new UserModel().getUser_firstname());
+				//System.out.println(new UserModel().getUser_id());
+				//System.out.println(new UserModel().getUser_pass());
+				//System.out.println(new UserModel().getUser_firstname());
 			} else {
 				System.out.println("fejl");
 			}

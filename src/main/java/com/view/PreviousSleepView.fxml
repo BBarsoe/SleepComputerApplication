@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SleepController">
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SleepController">
    <children>
-      <Button layoutX="419.0" layoutY="321.0" mnemonicParsing="false" onAction="#displayValue" text="OK" />
-      <Button fx:id="returnButton" layoutX="334.0" layoutY="321.0" mnemonicParsing="false" text="Tilbage" />
+      <Button fx:id="displayValueBtn" layoutX="419.0" layoutY="321.0" mnemonicParsing="false" onAction="#displayValue" text="OK" />
+      <Button fx:id="returnButton" layoutX="334.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleReturn" text="Tilbage" />
       <ChoiceBox fx:id="elevList" layoutX="34.0" layoutY="163.0" minWidth="0.0" prefHeight="35.0" prefWidth="150.0" />
       <Label layoutX="34.0" layoutY="139.0" prefHeight="17.0" prefWidth="82.0" text="Elevliste">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="34.0" layoutY="60.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Se individdata" />
-      <Button layoutX="240.0" layoutY="60.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" text="Se populationsdata" />
+      <Button fx:id="seIndData" layoutX="34.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleSeIndData" prefHeight="35.0" prefWidth="150.0" text="Se individdata" />
+      <Button fx:id="sePopData" layoutX="240.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleSePopData" prefHeight="35.0" prefWidth="172.0" text="Se populationsdata" />
       <DatePicker fx:id="startDatePicker" layoutX="246.0" layoutY="164.0" prefHeight="35.0" prefWidth="162.0" />
       <TextField fx:id="screen" layoutX="34.0" layoutY="264.0" prefHeight="45.0" prefWidth="362.0" />
       <DatePicker fx:id="endDatePicker" layoutX="246.0" layoutY="211.0" prefHeight="35.0" prefWidth="162.0" />
@@ -37,13 +37,13 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <BarChart fx:id="sleepData" layoutX="540.0" layoutY="11.0" prefHeight="682.0" prefWidth="531.0" title="Søvn data">
+      <LineChart fx:id="LineChart" layoutX="540.0" layoutY="-1.0" prefHeight="720.0" prefWidth="539.0" title="Søvn">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis side="BOTTOM" fx:id="x" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="y" side="LEFT" />
         </yAxis>
-      </BarChart>
+      </LineChart>
    </children>
 </AnchorPane>

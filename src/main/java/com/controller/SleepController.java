@@ -3,12 +3,11 @@ import javafx.event.ActionEvent;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+
+import javafx.scene.chart.*;
+import javafx.scene.control.*;
+
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
@@ -25,6 +24,12 @@ public class SleepController implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList();
     @FXML
     public DatePicker startDatePicker;
+
+    @FXML
+    public LineChart LinechartSleep;
+
+    @FXML
+    public Button displayValueBtn;
 
     @FXML
     public DatePicker endDatePicker;
@@ -48,6 +53,27 @@ public class SleepController implements Initializable {
     //   loadData();
 
     // }
+    @FXML
+    private void handleSeIndData() {
+        screen.setDisable(false);
+        startDatePicker.setDisable(false);
+        endDatePicker.setDisable(false);
+        elevList.setDisable(false);
+        displayValueBtn.setDisable(false);
+    }
+    @FXML
+    private void handleSePopData(){
+        screen.setDisable(false);
+        startDatePicker.setDisable(false);
+        endDatePicker.setDisable(false);
+        displayValueBtn.setDisable(false);
+    }
+
+    @FXML
+    private void handleReturn() {
+        new MainController().goToMainView();
+    }
+
     private void loadData() throws SQLException {
         list.removeAll(list);
         DatabaseController.loadStudentListModel();
@@ -60,20 +86,15 @@ public class SleepController implements Initializable {
     private void displayValue(ActionEvent event) throws SQLException {
         String elev = elevList.getValue();
 
-        if (elev != null) {
-         if ((String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
+        if ((elev != null) && (String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
              DatabaseController.loadSleepModel(elev);
-             //XYChart.Series set1 = new XYChart.Series<>();
+            String sleep_time = new SleepModel().getSleep_time();
+            String sleep_awoke = new SleepModel().getAwoke_time();
+            System.out.println(sleep_time);
+            System.out.println(sleep_awoke);
 
-             //String sleep_time = new SleepModel().getSleep_time();
-             //set1.getData().add(sleep_time);
-             System.out.println(new SleepModel().getSleep_time());
-             System.out.println(new SleepModel().getAwoke_time());
-         } else{
-             screen.setText("Datointerval ikke valgt");
-                      }
         }else{
-            screen.setText("Elev ikke valgt");
+            screen.setText("Elev eller datointerval ikke valgt");
         }
     }
 
@@ -99,6 +120,12 @@ public class SleepController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        screen.setDisable(true);
+        startDatePicker.setDisable(true);
+        endDatePicker.setDisable(true);
+        elevList.setDisable(true);
+        displayValueBtn.setDisable(true);
+
     }
 }
 
