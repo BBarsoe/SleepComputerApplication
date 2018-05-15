@@ -1,3 +1,4 @@
+import javafx.beans.value.ObservableListValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.collections.ObservableList;
@@ -6,15 +7,22 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 
+import javax.print.attribute.standard.NumberUp;
 import java.net.URL;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 
 //import static java.time.OffsetDateTime.now;
@@ -26,7 +34,12 @@ public class SleepController implements Initializable {
     public DatePicker startDatePicker;
 
     @FXML
-    public LineChart LinechartSleep;
+    public LineChart<?, ?> LineChart;
+    @FXML
+    private CategoryAxis x;
+    @FXML
+    private NumberAxis y;
+
 
     @FXML
     public Button displayValueBtn;
@@ -61,8 +74,9 @@ public class SleepController implements Initializable {
         elevList.setDisable(false);
         displayValueBtn.setDisable(false);
     }
+
     @FXML
-    private void handleSePopData(){
+    private void handleSePopData() {
         screen.setDisable(false);
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
@@ -87,13 +101,14 @@ public class SleepController implements Initializable {
         String elev = elevList.getValue();
 
         if ((elev != null) && (String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
-             DatabaseController.loadSleepModel(elev);
-            String sleep_time = new SleepModel().getSleep_time();
-            String sleep_awoke = new SleepModel().getAwoke_time();
-            System.out.println(sleep_time);
-            System.out.println(sleep_awoke);
+            DatabaseController.loadSleepModel(elev);
+            ArrayList<String> sleep_time = new SleepModel().getSleep_time();
+            ArrayList<String> sleep_awoke = new SleepModel().getAwoke_time();
+            LineChart(sleep_time, sleep_awoke);
+            //System.out.println(sleep_time);
+            //System.out.println(sleep_awoke);
 
-        }else{
+        } else {
             screen.setText("Elev eller datointerval ikke valgt");
         }
     }
@@ -105,10 +120,10 @@ public class SleepController implements Initializable {
         LocalDate today = LocalDate.of(2018, Month.MAY, 14);
         LocalDate localDate = today.minusWeeks(2);
 
-       // LocalDate today = LocalDate.now();
-       // LocalDate weeks = today.minusWeeks(1);
+        // LocalDate today = LocalDate.now();
+        // LocalDate weeks = today.minusWeeks(1);
 
-       // startDatePicker.setValue(startDatePicker.getValue(now()).minusWeeks(2));
+        // startDatePicker.setValue(startDatePicker.getValue(now()).minusWeeks(2));
         //endDatePicker.setValue(today);
 
     }
@@ -126,6 +141,39 @@ public class SleepController implements Initializable {
         elevList.setDisable(true);
         displayValueBtn.setDisable(true);
 
+    }
+
+    public void LineChart(ArrayList<String> sleep_time, ArrayList<String> awoke_time) {
+        //XYChart.Series series = new XYChart.Series();
+        ObservableList<XYChart.Data<String, Long>> data = FXCollections.<XYChart.Data<String, Long>>observableArrayList();
+
+        y.setLabel("sovet(min)");
+        x.setLabel("dag");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        for (int i = 0; i < sleep_time.size(); i++) {
+            long[] diff = new long[sleep_time.size()];
+            String awoke = awoke_time.get(i);
+            String time = sleep_time.get(i);
+            String[] splittime = time.split(" ");
+            String[] splitawoke = awoke.split(" ");
+            Time hours_bedTime = Time.valueOf((splittime[1]));
+            Time hours_awokeTime = Time.valueOf(splitawoke[1]);
+            String date = ((splittime[0]));
+
+            diff[i] = (hours_awokeTime.getTime() - hours_bedTime.getTime());
+
+            if (diff[i]>0) {
+                System.out.println(diff[i]);
+                data.add(new XYChart.Data<String,Long>(date,diff[i]));
+                XYChart.Series series = new XYChart.Series(data);
+                LineChart.getData().addAll(series);
+        }else{
+
+            }
+
+        //System.out.println();
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 import javafx.scene.control.Alert;
 
+import javax.naming.SizeLimitExceededException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,26 +34,26 @@ class DatabaseController {
 	static void loadSleepModel(String student_id) {
 		Statement st = null;
 		ResultSet rs = null;
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		java.util.Date dt = new java.util.Date();
-		String awoke_time = sdf.format(dt);
-		String sleep_time = sdf.format(dt);
+		//java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd ; HH:mm:ss");
+		//java.util.Date dt = new java.util.Date();
+		ArrayList<String> sleep_time_array = new ArrayList<>();
+		ArrayList<String> sleep_awoke_arry = new ArrayList<>();
 		try {
 
 			String SQL = ("SELECT * FROM sleepdata WHERE student_id= '" + student_id + "'");
 			connect().createStatement().executeQuery(SQL);
 			st = connect().createStatement();
 			rs = st.executeQuery(SQL);
-			if (rs.next()) {
+			while (rs.next()) {
 				student_id = rs.getString(1);
-				sleep_time = rs.getString(2);
-				awoke_time = rs.getString(3);
+				String sleep_time = rs.getString(2);
+				String awoke_time = rs.getString(3);
+				sleep_time_array.add(sleep_time);
+				sleep_awoke_arry.add(awoke_time);
 				new SleepModel().setStudent_id(student_id);
-				new SleepModel().setSleep_time(sleep_time);
-				new SleepModel().setAwoke_time(awoke_time);
-			} else {
-				System.out.println("fejl");
 			}
+			SleepModel.awoke_time = sleep_awoke_arry;
+			SleepModel.sleep_time = sleep_time_array;
 		}catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");

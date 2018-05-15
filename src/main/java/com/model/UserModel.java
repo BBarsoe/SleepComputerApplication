@@ -37,10 +37,14 @@ public class UserModel {
     public String getUser_firstname() {
         return user_firstname;
     }
-    public void update() {
+    public void updateDatabase() {
         String db_user_pass = getUser_pass();
         String db_user_firstname = getUser_firstname();
         DatabaseController.updateModel(db_user_pass, db_user_firstname);
+    }
+    public void loadDatabase() {
+        String db_user_id = getUser_id();
+        DatabaseController.loadUserModel(db_user_id);
     }
 
 }
