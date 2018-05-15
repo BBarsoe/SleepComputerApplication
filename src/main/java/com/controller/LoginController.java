@@ -89,7 +89,7 @@ public class LoginController {
         String register_firstname = register_name.getText();
         new UserModel().setUser_pass(register_pass);
         new UserModel().setUser_firstname(register_firstname);
-       DatabaseController.updateModel(new UserModel().getUser_pass(),new UserModel().getUser_firstname());
+        new UserModel().update();
 
         mainController.goToLogin();
     }

@@ -143,7 +143,7 @@ class DatabaseController {
 			String SQL = ("INSERT INTO healthcoordinator (user_pass,user_firstname) VALUES('"+user_pass+"','"+user_firstname+"')");
 			connect().createStatement().executeUpdate(SQL);
 
-			String SQL2 = ("SELECT user_id FROM healthcoordinator WHERE user_pass = '"+sql_pass+"'");
+			String SQL2 = ("SELECT user_id FROM healthcoordinator WHERE user_pass = '"+sql_pass+"' AND user_firstname = '"+user_firstname+"'");
 			st = connect().createStatement();
 			rs = st.executeQuery(SQL2);
 			if (rs.next()) {
