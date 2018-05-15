@@ -87,7 +87,9 @@ public class LoginController {
 	public void handleRegister () {
         String register_pass = register_password.getText();
         String register_firstname = register_name.getText();
-        DatabaseController.updateModel(register_pass,register_firstname);
+        new UserModel().setUser_pass(register_pass);
+        new UserModel().setUser_firstname(register_firstname);
+       DatabaseController.updateModel(new UserModel().getUser_pass(),new UserModel().getUser_firstname());
 
         mainController.goToLogin();
     }
