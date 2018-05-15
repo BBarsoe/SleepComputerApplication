@@ -89,6 +89,6 @@ public class LoginController {
         String register_firstname = register_name.getText();
         DatabaseController.updateModel(register_pass,register_firstname);
 
-        mainController.goToMainView();
+        mainController.goToLogin();
     }
 }
