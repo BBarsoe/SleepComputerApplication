@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -18,7 +19,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="meetingViewer" layoutX="41.0" layoutY="51.0" prefHeight="45.0" prefWidth="519.0" />
       <Button fx:id="handleRecommendMeetingButton" layoutX="449.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleRecommendMeetingButton" prefHeight="25.0" prefWidth="52.0" text="OK" />
       <Button fx:id="ReturnButton" layoutX="511.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleReturn" text="Tilbage" />
       <Label layoutX="41.0" layoutY="14.0" prefHeight="35.0" prefWidth="170.0" text="Arrangeret møder">
@@ -26,5 +26,6 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <ListView fx:id="listView" layoutX="41.0" layoutY="51.0" prefHeight="115.0" prefWidth="519.0" />
    </children>
 </AnchorPane>
