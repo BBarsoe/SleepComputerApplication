@@ -1,10 +1,20 @@
 import javafx.fxml.FXML;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
+import sun.tools.jar.Main;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,7 +23,6 @@ import java.sql.Statement;
 public class LoginController {
 
 	private static MainController mainController;
-
 
     @FXML
 	private TextField user_name;
@@ -47,8 +56,7 @@ public class LoginController {
 
     }
 
-	public void handleCancelButton() {
-	    mainController.goToLogin();
+	public void handleCancelButton() { mainController.goToLogin();
     }
 
 	public void validateID(){
@@ -85,7 +93,8 @@ public class LoginController {
 
     }
 
-	public void handleRegister () {
+
+    public void handleRegister () {
         String register_pass = register_password.getText();
         String register_firstname = register_name.getText();
         new UserModel().setUser_pass(register_pass);

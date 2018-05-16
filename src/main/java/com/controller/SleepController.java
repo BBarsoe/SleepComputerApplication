@@ -1,27 +1,26 @@
-import javafx.beans.value.ObservableListValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 
-import javax.print.attribute.standard.NumberUp;
+import javax.sound.sampled.Line;
 import java.net.URL;
+import java.sql.Array;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -34,7 +33,7 @@ public class SleepController implements Initializable {
     public DatePicker startDatePicker;
 
     @FXML
-    public LineChart<?, ?> LineChart;
+    public LineChart LineChart;
     @FXML
     private CategoryAxis x;
     @FXML
@@ -81,6 +80,10 @@ public class SleepController implements Initializable {
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
         displayValueBtn.setDisable(false);
+        DatabaseController.loadPopSleepModel();
+        ArrayList<String> sleep_time = new SleepModel().getSleep_time();
+        ArrayList<String> sleep_awoke = new SleepModel().getAwoke_time();
+        LineChart(sleep_time,sleep_awoke);
     }
 
     @FXML
@@ -144,38 +147,43 @@ public class SleepController implements Initializable {
     }
 
     public void LineChart(ArrayList<String> sleep_time, ArrayList<String> awoke_time) {
-        //XYChart.Series series = new XYChart.Series();
-        ObservableList<XYChart.Data<String, Long>> data = FXCollections.<XYChart.Data<String, Long>>observableArrayList();
+        ObservableList<XYChart.Series> DataList = FXCollections.observableArrayList();
+        XYChart.Series series = new XYChart.Series();
+
+
+        //XYChart.Series series = new XYChart.Series<>(x,y);
+         //ObservableList<XYChart.Data<String, Long>> data = FXCollections.<XYChart.Data<String, Long>>observableArrayList();
 
         y.setLabel("sovet(min)");
         x.setLabel("dag");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+        int[] diff = new int[sleep_time.size()];
+        String[] date_array = new String[sleep_time.size()];
+
         for (int i = 0; i < sleep_time.size(); i++) {
-            long[] diff = new long[sleep_time.size()];
             String awoke = awoke_time.get(i);
             String time = sleep_time.get(i);
             String[] splittime = time.split(" ");
             String[] splitawoke = awoke.split(" ");
             Time hours_bedTime = Time.valueOf((splittime[1]));
             Time hours_awokeTime = Time.valueOf(splitawoke[1]);
-            String date = ((splittime[0]));
+            date_array[i] = ((splittime[0]));
 
-            diff[i] = (hours_awokeTime.getTime() - hours_bedTime.getTime());
+            diff[i] = ((int)hours_awokeTime.getTime() - (int)hours_bedTime.getTime());
 
             if (diff[i]>0) {
-                System.out.println(diff[i]);
-                data.add(new XYChart.Data<String,Long>(date,diff[i]));
-                XYChart.Series series = new XYChart.Series(data);
-                LineChart.getData().addAll(series);
+                series.getData().add(new XYChart.Data<String,Number>(""+date_array[i]+"",(Number) diff[i]));
+
         }else{
 
             }
-
-        //System.out.println();
         }
+        DataList.addAll(series);
+        LineChart.setData(DataList);
     }
 }
+
 
 
 

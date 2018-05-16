@@ -2,6 +2,7 @@ import javafx.scene.control.Alert;
 
 import javax.naming.SizeLimitExceededException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,6 +32,34 @@ class DatabaseController {
 		}
 	}
 
+	static void loadPopSleepModel() {
+		Statement st = null;
+		ResultSet rs = null;
+		//java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd ; HH:mm:ss");
+		//java.util.Date dt = new java.util.Date();
+		ArrayList<String> sleep_time_array = new ArrayList<>();
+		ArrayList<String> sleep_awoke_arry = new ArrayList<>();
+		try {
+
+			String SQL = ("SELECT sleep_time, awoke_time FROM sleepdata");
+			connect().createStatement().executeQuery(SQL);
+			st = connect().createStatement();
+			rs = st.executeQuery(SQL);
+			while (rs.next()) {
+				String sleep_time = rs.getString(1);
+				String awoke_time = rs.getString(2);
+				sleep_time_array.add(sleep_time);
+				sleep_awoke_arry.add(awoke_time);
+			}
+			SleepModel.awoke_time = sleep_awoke_arry;
+			SleepModel.sleep_time = sleep_time_array;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL ERROR");
+		}
+	}
+
+
 	static void loadSleepModel(String student_id) {
 		Statement st = null;
 		ResultSet rs = null;
@@ -54,32 +83,41 @@ class DatabaseController {
 			}
 			SleepModel.awoke_time = sleep_awoke_arry;
 			SleepModel.sleep_time = sleep_time_array;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
 		}
 	}
 
 	static void loadMeetingModel() {
-	    Statement st = null;
-        ResultSet rs = null;
-        ArrayList<String> participatingStudent = new ArrayList<>();
-        try {
-            String SQL = ("SELECT * FROM meeting WHERE user_id = 0");
-            connect().createStatement().executeQuery(SQL);
-            st = connect().createStatement();
-            rs = st.executeQuery(SQL);
-            while (rs.next()) {
-                String student_id = rs.getString(2);
-                participatingStudent.add(student_id);
-            }
-            MeetingModel.participatingStudent_id = participatingStudent;
+		Statement st = null;
+		ResultSet rs = null;
+		ArrayList<String> participatingStudent = new ArrayList<>();
+		ArrayList<Date> meeting_time = new ArrayList<>();
+		ArrayList<String> participatingCoordinator = new ArrayList<>();
+		try {
+			String SQL = ("SELECT * FROM meeting");
+			connect().createStatement().executeQuery(SQL);
+			st = connect().createStatement();
+			rs = st.executeQuery(SQL);
+			while (rs.next()) {
+				String student_id = rs.getString(2);
+				String participatingCoordinator_id = rs.getString(3);
+				Date meetingTime = rs.getDate(1);
+				participatingStudent.add(student_id);
+				meeting_time.add(meetingTime);
+				participatingCoordinator.add(participatingCoordinator_id);
+			}
+			MeetingModel.setParticipatingCoordinator(participatingCoordinator);
+			MeetingModel.participatingStudent_id = participatingStudent;
+			MeetingModel.setMeetingTime(meeting_time);
 
-        }catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("SQL ERROR");
-        }
-    }
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL ERROR");
+		}
+	}
 
 	static void loadStudentListModel() {
 		Statement st = null;
@@ -92,12 +130,12 @@ class DatabaseController {
 			st = connect().createStatement();
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
-					String student = rs.getString(1);
-					studentListModels.add(student);
+				String student = rs.getString(1);
+				studentListModels.add(student);
 
 			}
 			StudentListModel.studentList_id = studentListModels;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
 		}
@@ -129,7 +167,7 @@ class DatabaseController {
 			} else {
 				System.out.println("fejl");
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
 		}
@@ -141,10 +179,10 @@ class DatabaseController {
 		ResultSet rs = null;
 		String sql_pass = user_pass;
 		try {
-			String SQL = ("INSERT INTO healthcoordinator (user_pass,user_firstname) VALUES('"+user_pass+"','"+user_firstname+"')");
+			String SQL = ("INSERT INTO healthcoordinator (user_pass,user_firstname) VALUES('" + user_pass + "','" + user_firstname + "')");
 			connect().createStatement().executeUpdate(SQL);
 
-			String SQL2 = ("SELECT user_id FROM healthcoordinator WHERE user_pass = '"+sql_pass+"' AND user_firstname = '"+user_firstname+"'");
+			String SQL2 = ("SELECT user_id FROM healthcoordinator WHERE user_pass = '" + sql_pass + "' AND user_firstname = '" + user_firstname + "'");
 			st = connect().createStatement();
 			rs = st.executeQuery(SQL2);
 			if (rs.next()) {
@@ -158,5 +196,17 @@ class DatabaseController {
 			System.out.println("SQL ERROR");
 		}
 
+	}
+
+	static void updateMeetingModel(String student_id, String user_id, LocalDate meetingDate) {
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			String SQL = ("UPDATE meeting SET meeting_time = '" + meetingDate + "', user_id = '" + user_id + "' WHERE student_id = '" + student_id + "'");
+			connect().createStatement().executeUpdate(SQL);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL ERROR");
+		}
 	}
 }

@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 import javax.xml.crypto.Data;
 import java.awt.*;
@@ -36,8 +37,6 @@ public class MainController extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Sleep Computer Application");
 		this.primaryStage.setResizable(false);
-
-
 		goToLogin();
 		initDatabaseConnection();
 	}
