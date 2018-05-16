@@ -67,7 +67,7 @@ public class SleepController implements Initializable {
     // }
     @FXML
     private void handleSeIndData() {
-        screen.setDisable(false);
+ //       screen.setDisable(false);
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
         elevList.setDisable(false);
@@ -76,7 +76,7 @@ public class SleepController implements Initializable {
 
     @FXML
     private void handleSePopData() {
-        screen.setDisable(false);
+//        screen.setDisable(false);
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
         displayValueBtn.setDisable(false);
@@ -112,7 +112,7 @@ public class SleepController implements Initializable {
             //System.out.println(sleep_awoke);
 
         } else {
-            screen.setText("Elev eller datointerval ikke valgt");
+//            screen.setText("Elev eller datointerval ikke valgt");
         }
     }
 
@@ -138,7 +138,7 @@ public class SleepController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        screen.setDisable(true);
+//        screen.setDisable(true);
         startDatePicker.setDisable(true);
         endDatePicker.setDisable(true);
         elevList.setDisable(true);
