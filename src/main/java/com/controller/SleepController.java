@@ -9,6 +9,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import sun.util.resources.da.CalendarData_da;
 
 
 import javax.sound.sampled.Line;
@@ -151,6 +152,7 @@ public class SleepController implements Initializable {
         XYChart.Series series = new XYChart.Series();
 
 
+
         //XYChart.Series series = new XYChart.Series<>(x,y);
          //ObservableList<XYChart.Data<String, Long>> data = FXCollections.<XYChart.Data<String, Long>>observableArrayList();
 
@@ -158,7 +160,7 @@ public class SleepController implements Initializable {
         x.setLabel("dag");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        int[] diff = new int[sleep_time.size()];
+        long[] diff = new long[sleep_time.size()];
         String[] date_array = new String[sleep_time.size()];
 
         for (int i = 0; i < sleep_time.size(); i++) {
@@ -169,12 +171,29 @@ public class SleepController implements Initializable {
             Time hours_bedTime = Time.valueOf((splittime[1]));
             Time hours_awokeTime = Time.valueOf(splitawoke[1]);
             date_array[i] = ((splittime[0]));
-
-            diff[i] = ((int)hours_awokeTime.getTime() - (int)hours_bedTime.getTime());
+            diff[i] =(hours_awokeTime.getTime() - hours_bedTime.getTime());
+            if (diff[i] < 0)
+                diff[i] = diff[i] + 86400000; // 24 timer
 
             if (diff[i]>0) {
-                series.getData().add(new XYChart.Data<String,Number>(""+date_array[i]+"",(Number) diff[i]));
+                if (i > 1) {
+                    System.out.println(diff[i]);
+                    if (date_array[i - 1].equals(date_array[i])) {
+                        diff[i] = diff[i] + diff[i - 1];
+                        System.out.println(diff[i]);
+                    }
+                    else{
+                        series.getData().add(new XYChart.Data<String, Number>("" + date_array[i-1] + "", (Number) diff[i-1]));
+                    }
+                    if (sleep_time.size()-1 == i){
+                        series.getData().add(new XYChart.Data<String, Number>("" + date_array[i] + "", (Number) diff[i]));
+                    } else {
 
+                    }
+                }
+                    else{
+                        series.getData().add(new XYChart.Data<String, Number>("" + date_array[i] + "", (Number) diff[i]));
+                    }
         }else{
 
             }
