@@ -26,7 +26,7 @@ public class MeetingController implements Initializable {
     public ListView potentialMeeting;
 
     private void handlePotentialMeeting() {
-        meetingModel.load();
+        meetingModel.loadModel();
         ArrayList<String> studentList = MeetingModel.participatingStudent_id;
         ArrayList<Date> meeting_time = MeetingModel.getMeetingTime();
         String[] user_id = MeetingModel.getParticipatingCoordinator().toArray(new String[0]);
@@ -46,7 +46,7 @@ public class MeetingController implements Initializable {
 
 
     private void showMeetings() throws SQLException {
-        meetingModel.load();
+        meetingModel.loadModel();
         ArrayList<String> studentList = MeetingModel.participatingStudent_id;
         String[] user_id = MeetingModel.getParticipatingCoordinator().toArray(new String[0]);
         for (int i = 0; i < studentList.size(); i++) {
@@ -81,7 +81,7 @@ public class MeetingController implements Initializable {
             String student_id = elevList.getValue();
             LocalDate date = selectMeetingTime.getValue();
             String user_id = new UserModel().getUser_id();
-            meetingModel.update(student_id,user_id,date);
+            meetingModel.updateModel(student_id,user_id,date);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Der er arrangeret møde med elev: " +student_id+ " denne dato: "+date);
             alert.show();

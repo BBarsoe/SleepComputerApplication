@@ -86,7 +86,7 @@ public class SleepController implements Initializable {
 
     private void loadData() throws SQLException {
         list.removeAll(list);
-        studentListModel.load();
+        studentListModel.loadModel();
         ArrayList<String> studentList = StudentListModel.studentList_id;
         list.addAll(studentList);
         listChooseStudent.getItems().addAll(list);

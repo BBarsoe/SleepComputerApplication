@@ -29,10 +29,10 @@ import java.util.Date;
      return participatingStudent_id;
     }
 
-     void load(){
+     void loadModel(){
         DatabaseController.loadMeetingModel();
     }
-     void update(String student_id, String user_id, LocalDate date){
+     void updateModel(String student_id, String user_id, LocalDate date){
         DatabaseController.updateMeetingModel(student_id,user_id,date);
     }
 }
