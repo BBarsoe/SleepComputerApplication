@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SleepController implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList();
+    SleepModel sleepModel = new SleepModel();
     @FXML
     public DatePicker startDatePicker;
 
@@ -76,14 +77,14 @@ public class SleepController implements Initializable {
     }
 
     @FXML
-    private void handleSePopData() {
+    private void handlePopData() {
 //        screen.setDisable(false);
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
         displayValueBtn.setDisable(false);
         DatabaseController.loadPopSleepModel();
-        ArrayList<String> sleep_time = new SleepModel().getSleep_time();
-        ArrayList<String> sleep_awoke = new SleepModel().getAwoke_time();
+        ArrayList<String> sleep_time = sleepModel.getSleep_time();
+        ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
         LineChart(sleep_time,sleep_awoke);
     }
 
@@ -106,8 +107,8 @@ public class SleepController implements Initializable {
 
         if ((elev != null) && (String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
             DatabaseController.loadSleepModel(elev);
-            ArrayList<String> sleep_time = new SleepModel().getSleep_time();
-            ArrayList<String> sleep_awoke = new SleepModel().getAwoke_time();
+            ArrayList<String> sleep_time = sleepModel.getSleep_time();
+            ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
             LineChart(sleep_time, sleep_awoke);
             //System.out.println(sleep_time);
             //System.out.println(sleep_awoke);
@@ -180,6 +181,7 @@ public class SleepController implements Initializable {
                     System.out.println(diff[i]);
                     if (date_array[i - 1].equals(date_array[i])) {
                         diff[i] = diff[i] + diff[i - 1];
+
                         System.out.println(diff[i]);
                     }
                     else{
