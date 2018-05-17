@@ -5,8 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import sun.tools.jar.Main;
 
 import java.awt.*;
 import java.net.URL;
@@ -17,7 +15,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class MeetingController implements Initializable {
+public class ArrangeMeetingController implements Initializable {
     ObservableList<String> meetingList = FXCollections.observableArrayList();
     final ObservableList<String> arranged_meetingList = FXCollections.observableArrayList();
 
@@ -25,11 +23,11 @@ public class MeetingController implements Initializable {
 
     @FXML
     public ChoiceBox<String> elevList;
-    public DatePicker Datepicker;
-    public ListView listView;
+    public DatePicker selectMeetingTime;
+    public ListView potentialMeeting;
 
     private void handlePotentialMeeting() {
-        DatabaseController.loadMeetingModel();
+        new MeetingModel().load();
         ArrayList<String> studentList = MeetingModel.participatingStudent_id;
         ArrayList<Date> meeting_time = MeetingModel.getMeetingTime();
         String[] user_id = MeetingModel.getParticipatingCoordinator().toArray(new String[0]);
@@ -49,7 +47,7 @@ public class MeetingController implements Initializable {
 
 
     private void showMeetings() throws SQLException {
-        DatabaseController.loadMeetingModel();
+        new MeetingModel().load();
         ArrayList<String> studentList = MeetingModel.participatingStudent_id;
         String[] user_id = MeetingModel.getParticipatingCoordinator().toArray(new String[0]);
         for (int i = 0; i < studentList.size(); i++) {
@@ -67,7 +65,7 @@ public class MeetingController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            listView.setItems(arranged_meetingList);
+            potentialMeeting.setItems(arranged_meetingList);
             showMeetings();
             handlePotentialMeeting();
         } catch (SQLException e) {
@@ -80,11 +78,15 @@ public class MeetingController implements Initializable {
     }
 
     public void handleRecommendMeetingButton(){
-        if ((elevList.getValue()!= null) && (Datepicker.getValue() != null)) {
+        if ((elevList.getValue()!= null) && (selectMeetingTime.getValue() != null)) {
             String student_id = elevList.getValue();
-            LocalDate date = Datepicker.getValue();
+            LocalDate date = selectMeetingTime.getValue();
             String user_id = new UserModel().getUser_id();
-            DatabaseController.updateMeetingModel(student_id,user_id,date);
+            new MeetingModel().update(student_id,user_id,date);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Der er arrangeret møde med elev: " +student_id+ " denne dato: "+date);
+            alert.show();
+            new MainController().goToMainView();
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Du har ikke valgt elev og/eller dato");
