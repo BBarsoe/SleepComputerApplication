@@ -12,5 +12,9 @@ class StudentListModel {
         return studentList_id;
     }
 
+    void load(){
+        DatabaseController.loadStudentListModel();
+    }
+
 
 }

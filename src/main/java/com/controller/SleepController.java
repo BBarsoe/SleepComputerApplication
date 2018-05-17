@@ -31,11 +31,12 @@ import java.util.concurrent.TimeUnit;
 public class SleepController implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList();
     SleepModel sleepModel = new SleepModel();
+    StudentListModel studentListModel = new StudentListModel();
     @FXML
     public DatePicker startDatePicker;
 
     @FXML
-    public LineChart LineChart;
+    public LineChart PreviousSleep;
     @FXML
     private CategoryAxis x;
     @FXML
@@ -54,25 +55,15 @@ public class SleepController implements Initializable {
     @FXML
     public Label toLabel;
     @FXML
-    public ChoiceBox<String> elevList;
+    public ChoiceBox<String> listChooseStudent;
 
-    @FXML
-    private TextField screen;
 
-    @FXML
-    private BarChart sleepData;
-
-    //@Override
-    //public void initilize(URL, url, ResourceBundle rb) {
-    //   loadData();
-
-    // }
     @FXML
     private void handleSeIndData() {
  //       screen.setDisable(false);
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
-        elevList.setDisable(false);
+        listChooseStudent.setDisable(false);
         displayValueBtn.setDisable(false);
     }
 
@@ -95,18 +86,18 @@ public class SleepController implements Initializable {
 
     private void loadData() throws SQLException {
         list.removeAll(list);
-        DatabaseController.loadStudentListModel();
+        studentListModel.load();
         ArrayList<String> studentList = StudentListModel.studentList_id;
         list.addAll(studentList);
-        elevList.getItems().addAll(list);
+        listChooseStudent.getItems().addAll(list);
     }
 
     @FXML
-    private void displayValue(ActionEvent event) throws SQLException {
-        String elev = elevList.getValue();
+    private void handlePrevOKButton(ActionEvent event) throws SQLException {
+        String elev = listChooseStudent.getValue();
 
         if ((elev != null) && (String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
-            DatabaseController.loadSleepModel(elev);
+            sleepModel.load(elev);
             ArrayList<String> sleep_time = sleepModel.getSleep_time();
             ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
             LineChart(sleep_time, sleep_awoke);
@@ -143,7 +134,7 @@ public class SleepController implements Initializable {
 //        screen.setDisable(true);
         startDatePicker.setDisable(true);
         endDatePicker.setDisable(true);
-        elevList.setDisable(true);
+        listChooseStudent.setDisable(true);
         displayValueBtn.setDisable(true);
 
     }
@@ -201,7 +192,7 @@ public class SleepController implements Initializable {
             }
         }
         DataList.addAll(series);
-        LineChart.setData(DataList);
+        PreviousSleep.setData(DataList);
     }
 }
 

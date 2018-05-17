@@ -41,6 +41,11 @@ class SleepModel {
         this.awoke_time = awoke_time;
     }
 
+    void load(String student){
+         DatabaseController.loadSleepModel(student);
+
+    }
+
 
 }
 
