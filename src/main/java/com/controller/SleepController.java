@@ -171,9 +171,9 @@ public class SleepController implements Initializable {
             Time hours_bedTime = Time.valueOf((splittime[1]));
             Time hours_awokeTime = Time.valueOf(splitawoke[1]);
             date_array[i] = ((splittime[0]));
-            diff[i] =(hours_awokeTime.getTime() - hours_bedTime.getTime());
+            diff[i] =TimeUnit.MILLISECONDS.toMinutes(hours_awokeTime.getTime() - hours_bedTime.getTime());
             if (diff[i] < 0)
-                diff[i] = diff[i] + 86400000; // 24 timer
+                diff[i] = diff[i] + 1440; // 24 timer
 
             if (diff[i]>0) {
                 if (i > 1) {
