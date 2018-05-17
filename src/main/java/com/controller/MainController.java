@@ -1,20 +1,12 @@
-import com.sun.corba.se.spi.servicecontext.UEInfoServiceContext;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
-import javax.xml.crypto.Data;
-import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class MainController extends Application {
 

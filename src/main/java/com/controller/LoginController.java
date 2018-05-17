@@ -1,9 +1,5 @@
 import javafx.fxml.FXML;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -23,6 +19,7 @@ import java.sql.Statement;
 public class LoginController {
 
 	private static MainController mainController;
+	UserModel userModel = new UserModel();
 
     @FXML
 	private TextField user_name;
@@ -46,8 +43,8 @@ public class LoginController {
 
 	public void handleLoginButton () throws SQLException {
 			validateID();
-			new UserModel().setUser_id(user_name.getText());
-			new UserModel().loadDatabase();
+			userModel.setUser_id(user_name.getText());
+			userModel.loadDatabase();
 	}
 
 	public void handleGoToRegister (){
@@ -97,9 +94,9 @@ public class LoginController {
     public void handleRegister () {
         String register_pass = register_password.getText();
         String register_firstname = register_name.getText();
-        new UserModel().setUser_pass(register_pass);
-        new UserModel().setUser_firstname(register_firstname);
-        new UserModel().updateDatabase();
+        userModel.setUser_pass(register_pass);
+        userModel.setUser_firstname(register_firstname);
+        userModel.updateDatabase();
 
         mainController.goToLogin();
     }

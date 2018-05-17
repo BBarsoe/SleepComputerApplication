@@ -41,5 +41,6 @@ public class SleepModel {
         this.awoke_time = awoke_time;
     }
 
+
 }
 

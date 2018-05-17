@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,5 +20,12 @@ public class MeetingModel {
 
     public static ArrayList<Date> getMeetingTime(){
         return meetingTime;
+    }
+
+    public void load(){
+        DatabaseController.loadMeetingModel();
+    }
+    public void update(String student_id, String user_id, LocalDate date){
+        DatabaseController.updateMeetingModel(student_id,user_id,date);
     }
 }
