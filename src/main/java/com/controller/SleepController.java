@@ -73,7 +73,7 @@ public class SleepController implements Initializable {
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
         displayValueBtn.setDisable(false);
-        DatabaseController.loadPopSleepModel();
+        sleepModel.loadPopData();
         ArrayList<String> sleep_time = sleepModel.getSleep_time();
         ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
         LineChart(sleep_time,sleep_awoke);
@@ -97,7 +97,7 @@ public class SleepController implements Initializable {
         String elev = listChooseStudent.getValue();
 
         if ((elev != null) && (String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
-            sleepModel.load(elev);
+            sleepModel.loadIndData(elev);
             ArrayList<String> sleep_time = sleepModel.getSleep_time();
             ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
             LineChart(sleep_time, sleep_awoke);

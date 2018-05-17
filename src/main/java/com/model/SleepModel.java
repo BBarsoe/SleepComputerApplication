@@ -41,9 +41,11 @@ class SleepModel {
         this.awoke_time = awoke_time;
     }
 
-    void load(String student){
+    void loadIndData(String student){
          DatabaseController.loadSleepModel(student);
-
+    }
+    void loadPopData(){
+         DatabaseController.loadPopSleepModel();
     }
 
 
