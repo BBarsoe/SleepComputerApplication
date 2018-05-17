@@ -13,7 +13,10 @@ class DatabaseController {
 	static String dbAddress = "jdbc:mysql://212.10.146.182:3306/test?autoReconnect=true&useSSL=false";
 	static String dbUsername = "admin";
 	static String dbPassword = "KellePrik134!";
-	static UserModel userModel;
+	static UserModel userModel = new UserModel();
+	static MeetingModel meetingModel = new MeetingModel();
+	static SleepModel sleepModel = new SleepModel();
+	static StudentListModel studentListModel = new StudentListModel();
 
 	static Connection connect() {
 		try {
@@ -35,8 +38,6 @@ class DatabaseController {
 	static void loadPopSleepModel() {
 		Statement st = null;
 		ResultSet rs = null;
-		//java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd ; HH:mm:ss");
-		//java.util.Date dt = new java.util.Date();
 		ArrayList<String> sleep_time_array = new ArrayList<>();
 		ArrayList<String> sleep_awoke_arry = new ArrayList<>();
 		try {
@@ -51,8 +52,8 @@ class DatabaseController {
 				sleep_time_array.add(sleep_time);
 				sleep_awoke_arry.add(awoke_time);
 			}
-			SleepModel.awoke_time = sleep_awoke_arry;
-			SleepModel.sleep_time = sleep_time_array;
+			sleepModel.setAwoke_time(sleep_awoke_arry);
+			sleepModel.setSleep_time(sleep_time_array);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
@@ -81,8 +82,8 @@ class DatabaseController {
 				sleep_awoke_arry.add(awoke_time);
 				new SleepModel().setStudent_id(student_id);
 			}
-			SleepModel.awoke_time = sleep_awoke_arry;
-			SleepModel.sleep_time = sleep_time_array;
+			sleepModel.setAwoke_time(sleep_awoke_arry);
+			sleepModel.setSleep_time(sleep_time_array);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
@@ -108,9 +109,9 @@ class DatabaseController {
 				meeting_time.add(meetingTime);
 				participatingCoordinator.add(participatingCoordinator_id);
 			}
-			MeetingModel.setParticipatingCoordinator(participatingCoordinator);
-			MeetingModel.participatingStudent_id = participatingStudent;
-			MeetingModel.setMeetingTime(meeting_time);
+			meetingModel.setParticipatingCoordinator(participatingCoordinator);
+			meetingModel.setMeetingTime(meeting_time);
+			meetingModel.setparticipatingStudent_id(participatingStudent);
 
 
 		} catch (SQLException e) {
@@ -134,7 +135,8 @@ class DatabaseController {
 				studentListModels.add(student);
 
 			}
-			StudentListModel.studentList_id = studentListModels;
+			studentListModel.setStudentList_id(studentListModels);
+			//StudentListModel.studentList_id = studentListModels;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL ERROR");
@@ -158,9 +160,9 @@ class DatabaseController {
 				user_id = rs.getString(1);
 				user_pass = rs.getString(2);
 				user_firstname = rs.getString(3);
-				new UserModel().setUser_id(user_id);
-				new UserModel().setUser_pass(user_pass);
-				new UserModel().setUser_firstname(user_firstname);
+				userModel.setUser_id(user_id);
+				userModel.setUser_pass(user_pass);
+				userModel.setUser_firstname(user_firstname);
 				//System.out.println(new UserModel().getUser_id());
 				//System.out.println(new UserModel().getUser_pass());
 				//System.out.println(new UserModel().getUser_firstname());

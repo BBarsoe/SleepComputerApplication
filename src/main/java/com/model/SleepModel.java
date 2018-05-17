@@ -2,7 +2,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SleepModel {
+class SleepModel {
 
     private static String student_id;
     static ArrayList<String> sleep_time;
@@ -17,27 +17,27 @@ public class SleepModel {
     private Integer smoking;
     private Integer tired_before_bed;
 
-    public String getStudent_id() {
+     String getStudent_id() {
         return student_id;
     }
 
-    public void setStudent_id(String student_id) {
+     void setStudent_id(String student_id) {
         this.student_id = student_id;
     }
 
-    public ArrayList<String> getSleep_time() {
+     ArrayList<String> getSleep_time() {
         return sleep_time;
     }
 
-    public void setSleep_time(ArrayList<String> sleep_time) {
+     void setSleep_time(ArrayList<String> sleep_time) {
         this.sleep_time = sleep_time;
     }
 
-    public ArrayList<String> getAwoke_time() {
+     ArrayList<String> getAwoke_time() {
         return awoke_time;
     }
 
-    public void setAwoke_time(ArrayList<String> awoke_time) {
+     void setAwoke_time(ArrayList<String> awoke_time) {
         this.awoke_time = awoke_time;
     }
 

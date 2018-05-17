@@ -2,30 +2,37 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MeetingModel {
+ class MeetingModel {
     static ArrayList<String> participatingStudent_id;
     static ArrayList<String> participatingCoordinator;
     static ArrayList<Date> meetingTime;
 
-    public static void setParticipatingCoordinator(ArrayList<String> participatingCoordinator){
+    static void setParticipatingCoordinator(ArrayList<String> participatingCoordinator){
         MeetingModel.participatingCoordinator =participatingCoordinator;
     }
-    public static ArrayList<String> getParticipatingCoordinator(){
+    static ArrayList<String> getParticipatingCoordinator(){
         return participatingCoordinator;
     }
 
-    public static void setMeetingTime(ArrayList<Date> meetingTime) {
+    static void setMeetingTime(ArrayList<Date> meetingTime) {
         MeetingModel.meetingTime = meetingTime;
     }
 
-    public static ArrayList<Date> getMeetingTime(){
+    static ArrayList<Date> getMeetingTime(){
         return meetingTime;
     }
 
-    public void load(){
+    static void setparticipatingStudent_id(ArrayList<String> participatingStudent_id){
+        MeetingModel.participatingStudent_id = participatingStudent_id;
+    }
+    static ArrayList<String> getParticipatingStudent_id(){
+     return participatingStudent_id;
+    }
+
+     void load(){
         DatabaseController.loadMeetingModel();
     }
-    public void update(String student_id, String user_id, LocalDate date){
+     void update(String student_id, String user_id, LocalDate date){
         DatabaseController.updateMeetingModel(student_id,user_id,date);
     }
 }
