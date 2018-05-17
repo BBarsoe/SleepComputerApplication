@@ -15,11 +15,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ArrangeMeetingController implements Initializable {
+public class MeetingController implements Initializable {
+    MeetingModel meetingModel = new MeetingModel();
     ObservableList<String> meetingList = FXCollections.observableArrayList();
-    final ObservableList<String> arranged_meetingList = FXCollections.observableArrayList();
-
-    int potentialMeetings = 10;
+    ObservableList<String> arranged_meetingList = FXCollections.observableArrayList();
 
     @FXML
     public ChoiceBox<String> elevList;
@@ -27,7 +26,7 @@ public class ArrangeMeetingController implements Initializable {
     public ListView potentialMeeting;
 
     private void handlePotentialMeeting() {
-        new MeetingModel().load();
+        meetingModel.load();
         ArrayList<String> studentList = MeetingModel.participatingStudent_id;
         ArrayList<Date> meeting_time = MeetingModel.getMeetingTime();
         String[] user_id = MeetingModel.getParticipatingCoordinator().toArray(new String[0]);
@@ -47,7 +46,7 @@ public class ArrangeMeetingController implements Initializable {
 
 
     private void showMeetings() throws SQLException {
-        new MeetingModel().load();
+        meetingModel.load();
         ArrayList<String> studentList = MeetingModel.participatingStudent_id;
         String[] user_id = MeetingModel.getParticipatingCoordinator().toArray(new String[0]);
         for (int i = 0; i < studentList.size(); i++) {
@@ -82,7 +81,7 @@ public class ArrangeMeetingController implements Initializable {
             String student_id = elevList.getValue();
             LocalDate date = selectMeetingTime.getValue();
             String user_id = new UserModel().getUser_id();
-            new MeetingModel().update(student_id,user_id,date);
+            meetingModel.update(student_id,user_id,date);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Der er arrangeret møde med elev: " +student_id+ " denne dato: "+date);
             alert.show();
