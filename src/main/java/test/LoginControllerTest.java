@@ -39,9 +39,12 @@ public class LoginControllerTest extends ApplicationTest {
 
 	@Test
 	public void testValidUser () {
-		write("1");
+		String username = "1";
+		String password = "123";
+		write(username);
 		press(KeyCode.TAB);
-		write("123");
-		assertEquals("1", lookup("#user_name").<TextField>query().getText());
+		write(password);
+		assertEquals(username, lookup("#user_name").<TextField>query().getText());
+		assertEquals(password, lookup("#user_pass").<TextField>query().getText());
 	}
 }
