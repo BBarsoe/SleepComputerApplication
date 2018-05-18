@@ -22,9 +22,6 @@ public class MeetingController implements Initializable {
     public DatePicker selectMeetingTime;
     public ListView potentialMeeting;
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
-    }
 
     private void handleShowMeetings() {
         meetingModel.loadModel();
@@ -37,8 +34,6 @@ public class MeetingController implements Initializable {
             int readyForMeeting = Integer.parseInt(user_id[i]);
             if (readyForMeeting != 0) {
                 arranged_meetingList.add("Elev: "+studentList.get(i)+" møde dato: "+ meeting_time.get(i)+ " lokation: "+meeting_location.get(i));
-                //arranged_meetingList.addAll(String.valueOf(meeting_time.get(i)));
-                ///meetingViewer.getItems().addAll(arranged_meetingList);
 
             } else {
             }
@@ -54,8 +49,8 @@ public class MeetingController implements Initializable {
    }
     private void handlePotentialMeeting() throws SQLException {
         meetingModel.loadModel();
-        ArrayList<String> studentList = meetingModel.getParticipatingStudent_id();//MeetingModel.participatingStudent_id;
-        String[] user_id = meetingModel.getParticipatingCoordinator().toArray(new String[0]);//MeetingModel.getParticipatingCoordinator().toArray(new String[0]);
+        ArrayList<String> studentList = meetingModel.getParticipatingStudent_id();
+        String[] user_id = meetingModel.getParticipatingCoordinator().toArray(new String[0]);
         for (int i = 0; i < studentList.size(); i++) {
             int readyForMeeting = Integer.parseInt(user_id[i]);
             if ( readyForMeeting == 0 ){
@@ -84,21 +79,28 @@ public class MeetingController implements Initializable {
     }
 
     public void handleRecommendMeetingButton(){
-        if ((elevList.getValue()!= null) && (selectMeetingTime.getValue() != null)) {
-            String student_id = elevList.getValue();
-            LocalDate date = handleSelectMeetingTimeButton();
-            String user_id = userModel.getUser_id();
-            meetingModel.updateModel(student_id,user_id,date);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Der er arrangeret møde med elev: " +student_id+ " denne dato: "+date+ " dette sted: ");
-            alert.show();
-            new MainController().goToMain();
-        }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Du har ikke valgt elev og/eller dato");
-            alert.show();
+        for (int i=0; i < meetingModel.getParticipatingStudent_id().size(); i++) {
+            if (meetingModel.getParticipatingStudent_id().get(i).equals(elevList.getValue())){
 
+                if ((elevList.getValue()!= null) && (selectMeetingTime.getValue() != null)) {
+                    String student_id = elevList.getValue();
+                    LocalDate date = handleSelectMeetingTimeButton();
+                    String user_id = userModel.getUser_id();
+                    String meeting_location = meetingModel.getMeetingLocation().get(i);
+                    meetingModel.updateModel(student_id,user_id,date);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Der er arrangeret møde med elev: " +student_id+ " denne dato: "+date+ " dette sted: "+meeting_location);
+                    alert.show();
+                    new MainController().goToMain();
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Du har ikke valgt elev og/eller dato");
+                    alert.show();
+
+                }
+            }
             }
         }
+
 }
 
