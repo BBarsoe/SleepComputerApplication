@@ -56,6 +56,7 @@ class UserModel {
             st = DatabaseController.connect().createStatement();
             rs = st.executeQuery(SQL);
             if (rs.next()) {
+
                 sql_login_username = rs.getString(1);
                 sql_login_pass = rs.getString(2);
                 if (sql_login_username.equalsIgnoreCase(user_name) && sql_login_pass.equalsIgnoreCase(user_password)) {

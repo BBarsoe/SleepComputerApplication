@@ -72,18 +72,15 @@ public class LoginController {
 
 	public void handleGoToRegister (){
 	    mainController.goToRegister();
-
-
     }
 
-	public void handleCancelButton() {goToLogin(primaryStage);
+	public void handleCancelButton() {
+        goToLogin(primaryStage);
     }
 
 	public void validateID(String login_userID, String login_password){
         userModel.validateID(login_userID,login_password);
-
     }
-
 
     public void handleRegister () {
         String register_pass = register_password.getText();

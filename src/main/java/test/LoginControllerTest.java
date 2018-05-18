@@ -1,6 +1,7 @@
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
@@ -9,15 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
-import sun.applet.Main;
-
-import java.security.Key;
 
 import static org.junit.Assert.*;
 
 public class LoginControllerTest extends ApplicationTest {
 
-	public MainController mainController;
 	public FXMLLoader fxmlLoader = new FXMLLoader();
 
 	@Override
@@ -41,11 +38,10 @@ public class LoginControllerTest extends ApplicationTest {
 	}
 
 	@Test
-	public void testEnglishInput () {
+	public void testValidUser () {
 		write("1");
 		press(KeyCode.TAB);
 		write("123");
-		press(KeyCode.ENTER);
+		assertEquals("1", lookup("#user_name").<TextField>query().getText());
 	}
-
 }
