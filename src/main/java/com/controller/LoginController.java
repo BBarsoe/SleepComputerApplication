@@ -1,5 +1,7 @@
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -20,6 +22,8 @@ public class LoginController {
 
 	private static MainController mainController;
 	UserModel userModel = new UserModel();
+    private static Stage primaryStage;
+    private static AnchorPane loginView;
 
     @FXML
 	private TextField user_name;
@@ -36,57 +40,47 @@ public class LoginController {
     public void initialize(){
         LoginButton.setDefaultButton(true);
 	}
+    public void goToLogin(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainController.class
+                    .getResource("/LoginView.fxml"));
+            loginView = (AnchorPane) loader.load();
+            Scene scene = new Scene(loginView);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	public void setMainController(MainController mainController) {
 		this.mainController = mainController;
 	}
+	public void handleLogin() {
+        String login_username = user_name.getText();
+        String login_pass = user_pass.getText();
+        validateID(login_username, login_pass);
+        userModel.setUser_id(user_name.getText());
+        userModel.loadModel();
+    }
 
 	public void handleLoginButton () throws SQLException {
-			validateID();
-			userModel.setUser_id(user_name.getText());
-			userModel.loadModel();
+        handleLogin();
 	}
 
 	public void handleGoToRegister (){
-	    mainController.goToRegisterView();
+	    mainController.goToRegister();
 
 
     }
 
-	public void handleCancelButton() { mainController.goToLogin();
+	public void handleCancelButton() {goToLogin(primaryStage);
     }
 
-	public void validateID(){
-        Statement st = null;
-        ResultSet rs = null;
-        String sql_login_username;
-        String sql_login_pass;
-        String login_username = user_name.getText();
-        String login_pass = user_pass.getText();
-        try {
-            String SQL = ("SELECT * FROM healthcoordinator WHERE user_id = '" + user_name.getText() + "' AND user_pass = '" + user_pass.getText() + "'");
-            mainController.con.createStatement().executeQuery(SQL);
-            st = mainController.con.createStatement();
-            rs = st.executeQuery(SQL);
-            if (rs.next()) {
-                sql_login_username = rs.getString(1);
-                sql_login_pass = rs.getString(2);
-                if (sql_login_username.equalsIgnoreCase(login_username) && sql_login_pass.equalsIgnoreCase(login_pass)) {
-
-                    System.out.println("Login success");
-                    mainController.goToMainView();
-                } else {
-                    System.out.println("fejl");
-                }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("Forkert brugernavn eller kode");
-                alert.showAndWait();
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Brugernavn eller kodeord var forkert");
-        }
+	public void validateID(String login_userID, String login_password){
+        userModel.validateID(login_userID,login_password);
 
     }
 
@@ -97,7 +91,6 @@ public class LoginController {
         userModel.setUser_pass(register_pass);
         userModel.setUser_firstname(register_firstname);
         userModel.updateModel();
-
-        mainController.goToLogin();
+        goToLogin(primaryStage);
     }
 }

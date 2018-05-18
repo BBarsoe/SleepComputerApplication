@@ -11,8 +11,8 @@ import java.sql.Connection;
 public class MainController extends Application {
 
 	public static Connection con;
+	LoginController loginController = new LoginController();
 	private static Stage primaryStage;
-	private AnchorPane loginView;
 	private GridPane mainView;
 	private AnchorPane registerView;
 	private AnchorPane arrangeMeetingView;
@@ -29,7 +29,7 @@ public class MainController extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Sleep Computer Application");
 		this.primaryStage.setResizable(false);
-		goToLogin();
+		loginController.goToLogin(primaryStage);
 		initDatabaseConnection();
 	}
 
@@ -37,25 +37,8 @@ public class MainController extends Application {
 		con = DatabaseController.connect();
 	}
 
-	public void goToLogin() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainController.class
-					.getResource("/LoginView.fxml"));
-			loginView = (AnchorPane) loader.load();
-			Scene scene = new Scene(loginView);
-			primaryStage.setScene(scene);
-			LoginController controller = loader.getController();
-			controller.setMainController(this);
 
-			primaryStage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void goToRegisterView() {
+	public void goToRegister() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class.getResource("/RegisterView.fxml"));
@@ -72,7 +55,7 @@ public class MainController extends Application {
 		}
 	}
 
-	public void goToMainView() {
+	public void goToMain() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class
@@ -88,7 +71,7 @@ public class MainController extends Application {
 		}
 	}
 
-	public void goToArrangeMeetingView(){
+	public void goToArrangeMeeting(){
 		try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainController.class
@@ -103,7 +86,7 @@ public class MainController extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void goToPreviousSleepView() {
+	public void goToPreviousSleep() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class.getResource("/PreviousSleepView.fxml"));
@@ -118,7 +101,7 @@ public class MainController extends Application {
 		}
 	}
 
-	public void goToSleepHabitsView() {
+	public void goToSleepHabits() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainController.class.getResource("/SleepHabitsView.fxml"));
@@ -137,7 +120,7 @@ public class MainController extends Application {
 		new UserModel().setUser_id(null);
 		new UserModel().setUser_firstname(null);
 		new UserModel().setUser_pass(null);
-		goToLogin();
+		loginController.goToLogin(primaryStage);
 	}
 
 }

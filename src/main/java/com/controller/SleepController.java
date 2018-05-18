@@ -25,42 +25,33 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
-//import static java.time.OffsetDateTime.now;
-
 
 public class SleepController implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList();
-    SleepModel sleepModel = new SleepModel();
-    StudentListModel studentListModel = new StudentListModel();
+    private SleepModel sleepModel = new SleepModel();
+    private StudentListModel studentListModel = new StudentListModel();
     @FXML
-    public DatePicker startDatePicker;
+    private DatePicker startDatePicker;
 
     @FXML
-    public LineChart PreviousSleep;
+    private LineChart PreviousSleep;
     @FXML
     private CategoryAxis x;
     @FXML
     private NumberAxis y;
 
+    @FXML
+    private Button displayValueBtn;
 
     @FXML
-    public Button displayValueBtn;
+    private DatePicker endDatePicker;
 
     @FXML
-    public DatePicker endDatePicker;
-
-    @FXML
-    public Label fromLabel;
-
-    @FXML
-    public Label toLabel;
-    @FXML
-    public ChoiceBox<String> listChooseStudent;
+    private ChoiceBox<String> listChooseStudent;
 
 
     @FXML
-    private void handleSeIndData() {
- //       screen.setDisable(false);
+    private void handleIndData() {
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
         listChooseStudent.setDisable(false);
@@ -69,22 +60,22 @@ public class SleepController implements Initializable {
 
     @FXML
     private void handlePopData() {
-//        screen.setDisable(false);
         startDatePicker.setDisable(false);
         endDatePicker.setDisable(false);
         displayValueBtn.setDisable(false);
-        sleepModel.loadPopData();
+        sleepModel.loadModel(null);
+       // sleepModel.loadPopData();
         ArrayList<String> sleep_time = sleepModel.getSleep_time();
         ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
         LineChart(sleep_time,sleep_awoke);
     }
 
     @FXML
-    private void handleReturn() {
-        new MainController().goToMainView();
+    private void handlePrevReturnButton() {
+        new MainController().goToMain();
     }
 
-    private void loadData() throws SQLException {
+    private void listChooseStudent() throws SQLException {
         list.removeAll(list);
         studentListModel.loadModel();
         ArrayList<String> studentList = StudentListModel.studentList_id;
@@ -97,7 +88,7 @@ public class SleepController implements Initializable {
         String elev = listChooseStudent.getValue();
 
         if ((elev != null) && (String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
-            sleepModel.loadIndData(elev);
+            sleepModel.loadModel(elev);
             ArrayList<String> sleep_time = sleepModel.getSleep_time();
             ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
             LineChart(sleep_time, sleep_awoke);
@@ -127,7 +118,7 @@ public class SleepController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            loadData();
+            listChooseStudent();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -139,19 +130,12 @@ public class SleepController implements Initializable {
 
     }
 
-    public void LineChart(ArrayList<String> sleep_time, ArrayList<String> awoke_time) {
+    private void LineChart(ArrayList<String> sleep_time, ArrayList<String> awoke_time) {
         ObservableList<XYChart.Series> DataList = FXCollections.observableArrayList();
         XYChart.Series series = new XYChart.Series();
 
-
-
-        //XYChart.Series series = new XYChart.Series<>(x,y);
-         //ObservableList<XYChart.Data<String, Long>> data = FXCollections.<XYChart.Data<String, Long>>observableArrayList();
-
         y.setLabel("sovet(min)");
         x.setLabel("dag");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
         long[] diff = new long[sleep_time.size()];
         String[] date_array = new String[sleep_time.size()];
 
@@ -169,11 +153,11 @@ public class SleepController implements Initializable {
 
             if (diff[i]>0) {
                 if (i > 1) {
-                    System.out.println(diff[i]);
+                    //System.out.println(diff[i]);
                     if (date_array[i - 1].equals(date_array[i])) {
                         diff[i] = diff[i] + diff[i - 1];
 
-                        System.out.println(diff[i]);
+                        //System.out.println(diff[i]);
                     }
                     else{
                         series.getData().add(new XYChart.Data<String, Number>("" + date_array[i-1] + "", (Number) diff[i-1]));
@@ -194,6 +178,7 @@ public class SleepController implements Initializable {
         DataList.addAll(series);
         PreviousSleep.setData(DataList);
     }
+
 }
 
 

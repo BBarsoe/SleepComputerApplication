@@ -35,7 +35,7 @@ class DatabaseController {
 		}
 	}
 
-	static void loadPopSleepModel() {
+	public static void loadPopSleepModel() {
 		Statement st = null;
 		ResultSet rs = null;
 		ArrayList<String> sleep_time_array = new ArrayList<>();
@@ -61,7 +61,7 @@ class DatabaseController {
 	}
 
 
-	static void loadSleepModel(String student_id) {
+	public static void loadSleepModel(String student_id) {
 		Statement st = null;
 		ResultSet rs = null;
 		//java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd ; HH:mm:ss");
@@ -90,11 +90,12 @@ class DatabaseController {
 		}
 	}
 
-	static void loadMeetingModel() {
+	public static void loadMeetingModel() {
 		Statement st = null;
 		ResultSet rs = null;
 		ArrayList<String> participatingStudent = new ArrayList<>();
 		ArrayList<Date> meeting_time = new ArrayList<>();
+		ArrayList<String> meeting_location = new ArrayList<>();
 		ArrayList<String> participatingCoordinator = new ArrayList<>();
 		try {
 			String SQL = ("SELECT * FROM meeting");
@@ -105,6 +106,8 @@ class DatabaseController {
 				String student_id = rs.getString(2);
 				String participatingCoordinator_id = rs.getString(3);
 				Date meetingTime = rs.getDate(1);
+				String meetingLocation = rs.getString(4);
+				meeting_location.add(meetingLocation);
 				participatingStudent.add(student_id);
 				meeting_time.add(meetingTime);
 				participatingCoordinator.add(participatingCoordinator_id);
@@ -112,6 +115,7 @@ class DatabaseController {
 			meetingModel.setParticipatingCoordinator(participatingCoordinator);
 			meetingModel.setMeetingTime(meeting_time);
 			meetingModel.setparticipatingStudent_id(participatingStudent);
+			meetingModel.setMeetingLocation(meeting_location);
 
 
 		} catch (SQLException e) {
@@ -120,7 +124,7 @@ class DatabaseController {
 		}
 	}
 
-	static void loadStudentListModel() {
+	public static void loadStudentListModel() {
 		Statement st = null;
 		ResultSet rs = null;
 		ArrayList<String> studentListModels = new ArrayList<>();
@@ -145,7 +149,7 @@ class DatabaseController {
 	}
 
 
-	static void loadUserModel(String user_id) {
+	public static void loadUserModel(String user_id) {
 		Statement st = null;
 		ResultSet rs = null;
 		String user_pass;
@@ -176,7 +180,7 @@ class DatabaseController {
 
 	}
 
-	static void updateModel(String user_pass, String user_firstname) {
+	public static void updateModel(String user_pass, String user_firstname) {
 		Statement st = null;
 		ResultSet rs = null;
 		String sql_pass = user_pass;
@@ -200,7 +204,7 @@ class DatabaseController {
 
 	}
 
-	static void updateMeetingModel(String student_id, String user_id, LocalDate meetingDate) {
+	public static void updateMeetingModel(String student_id, String user_id, LocalDate meetingDate) {
 		Statement st = null;
 		ResultSet rs = null;
 		try {
