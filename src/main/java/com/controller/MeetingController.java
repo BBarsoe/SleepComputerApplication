@@ -44,9 +44,9 @@ public class MeetingController implements Initializable {
 
    private LocalDate handleSelectMeetingTimeButton() {
         LocalDate date = selectMeetingTime.getValue();
-
-       return date;
+        return date;
    }
+
     private void handlePotentialMeeting() throws SQLException {
         meetingModel.loadModel();
         ArrayList<String> studentList = meetingModel.getParticipatingStudent_id();

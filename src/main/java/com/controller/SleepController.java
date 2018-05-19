@@ -127,7 +127,6 @@ public class SleepController implements Initializable {
         endDatePicker.setDisable(true);
         listChooseStudent.setDisable(true);
         displayValueBtn.setDisable(true);
-
     }
 
     private void LineChart(ArrayList<String> sleep_time, ArrayList<String> awoke_time) {

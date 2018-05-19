@@ -38,9 +38,10 @@ public class LoginControllerTest extends ApplicationTest {
 	}
 
 	@Test
-	public void testValidUser () {
+	public void testUserInput () {
 		String username = "1";
 		String password = "123";
+		clickOn("#user_name");
 		write(username);
 		press(KeyCode.TAB);
 		write(password);
