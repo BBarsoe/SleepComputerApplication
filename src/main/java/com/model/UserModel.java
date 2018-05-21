@@ -1,11 +1,11 @@
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 class UserModel {
-
     private static String user_id;
     private static String user_pass;
     private static String user_firstname;
@@ -62,6 +62,8 @@ class UserModel {
                 if (sql_login_username.equalsIgnoreCase(user_name) && sql_login_pass.equalsIgnoreCase(user_password)) {
 
                     System.out.println("Login success");
+                    setUser_id(user_name);
+                    loadModel();
                     new MainController().goToMain();
                 } else {
                     System.out.println("fejl");
@@ -73,7 +75,6 @@ class UserModel {
             }
         }catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Brugernavn eller kodeord var forkert");
         }
     }
 

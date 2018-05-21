@@ -3,6 +3,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MeetingController implements Initializable {
+    private static Stage primaryStage;
     private MeetingModel meetingModel = new MeetingModel();
     private UserModel userModel = new UserModel();
     private ObservableList<String> meetingList = FXCollections.observableArrayList();
@@ -75,7 +77,7 @@ public class MeetingController implements Initializable {
     }
 
     public void handleReturn(){
-        new MainController().goToMain();
+         new MainController().goToMain();
     }
 
     public void handleRecommendMeetingButton(){

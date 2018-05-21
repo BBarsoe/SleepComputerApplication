@@ -20,10 +20,12 @@ import java.sql.Statement;
 
 public class LoginController {
 
-	private static MainController mainController;
+	private MainController mainController;
 	UserModel userModel = new UserModel();
+
     private static Stage primaryStage;
     private static AnchorPane loginView;
+    private static AnchorPane registerView;
 
     @FXML
 	private TextField user_name;
@@ -41,12 +43,28 @@ public class LoginController {
         LoginButton.setDefaultButton(true);
 	}
     public void goToLogin(Stage primaryStage) {
+        this.primaryStage = mainController.primaryStage;
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainController.class
                     .getResource("/LoginView.fxml"));
             loginView = (AnchorPane) loader.load();
             Scene scene = new Scene(loginView);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToRegister(Stage primaryStage) {
+        this.primaryStage = mainController.primaryStage;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainController.class.getResource("/RegisterView.fxml"));
+            registerView = (AnchorPane) loader.load();
+            Scene scene = new Scene(registerView);
             primaryStage.setScene(scene);
             primaryStage.show();
 
@@ -62,8 +80,6 @@ public class LoginController {
         String login_username = user_name.getText();
         String login_pass = user_pass.getText();
         validateID(login_username, login_pass);
-        userModel.setUser_id(user_name.getText());
-        userModel.loadModel();
     }
 
 	public void handleLoginButton () throws SQLException {
@@ -71,7 +87,7 @@ public class LoginController {
 	}
 
 	public void handleGoToRegister (){
-	    mainController.goToRegister();
+        goToRegister(primaryStage);
     }
 
 	public void handleCancelButton() {

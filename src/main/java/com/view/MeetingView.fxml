@@ -17,8 +17,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="OK" layoutX="435.0" layoutY="278.0" mnemonicParsing="false" onAction="#handleRecommendMeetingButton" prefHeight="25.0" prefWidth="52.0" text="OK" />
-      <Button fx:id="ReturnButton" layoutX="505.0" layoutY="278.0" mnemonicParsing="false" onAction="#handleReturn" text="Tilbage" />
+      <Button fx:id="OK" layoutX="431.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleRecommendMeetingButton" prefHeight="25.0" prefWidth="52.0" text="OK" />
+      <Button fx:id="ReturnButton" layoutX="505.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleReturn" text="Tilbage" />
       <Label layoutX="41.0" layoutY="14.0" prefHeight="35.0" prefWidth="170.0" text="Arrangeret møder">
          <font>
             <Font size="18.0" />

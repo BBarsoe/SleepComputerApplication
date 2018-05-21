@@ -6,15 +6,15 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 
 public class MainController extends Application {
 
 	public static Connection con;
 	LoginController loginController = new LoginController();
-	private static Stage primaryStage;
-	private GridPane mainView;
-	private AnchorPane registerView;
+	public static Stage primaryStage;
+	private static GridPane mainView;
 	private AnchorPane arrangeMeetingView;
 	private AnchorPane previousSleepView;
 	private AnchorPane sleepHabitsView;
@@ -37,23 +37,6 @@ public class MainController extends Application {
 		con = DatabaseController.connect();
 	}
 
-
-	public void goToRegister() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainController.class.getResource("/RegisterView.fxml"));
-			registerView = (AnchorPane) loader.load();
-			Scene scene = new Scene(registerView);
-			primaryStage.setScene(scene);
-			LoginController controller = loader.getController();
-			controller.setMainController(this);
-
-			primaryStage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void goToMain() {
 		try {
