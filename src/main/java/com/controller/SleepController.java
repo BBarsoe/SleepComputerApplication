@@ -60,8 +60,6 @@ public class SleepController implements Initializable {
         endDatePicker.setDisable(false);
         displayValueBtn.setDisable(false);
         sleepModel.loadModel(null);
-        // sleepModel.loadPopData();
-        System.out.println(sleepModel.getStudent_id());
         ArrayList<String> sleep_time = sleepModel.getSleep_time();
         ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
         LineChart(sleep_time, sleep_awoke);
