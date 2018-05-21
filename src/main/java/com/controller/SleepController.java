@@ -145,7 +145,6 @@ public class SleepController implements Initializable {
             date_array[i] = ((splittime[0]));
 
                 diff[i] = TimeUnit.MILLISECONDS.toMinutes(hours_awokeTime.getTime() - hours_bedTime.getTime());
-                System.out.println(date_array[i] + " : " + diff[i]);
             if (diff[i] < 0)
                 diff[i] = diff[i] + 1440; // 24 timer
 
@@ -154,12 +153,10 @@ public class SleepController implements Initializable {
                     diff[i] = diff[i] + diff[i - 1];
 
                 } else if (diff[i-1] != 0) {
-                    System.out.println(" burde ikke være 0 = "+ date_array[i] + " : "+ diff[i]);
                     series.getData().add(new XYChart.Data<String, Number>("" + date_array[i - 1] + "", (Number) diff[i - 1]));
                 }
 
                 if (sleep_time.size() - 1 == i && diff[i] != 0) {
-                    System.out.println("dav : " + diff[i]);
                     series.getData().add(new XYChart.Data<String, Number>("" + date_array[i] + "", (Number) diff[i]));
                 }
             }
