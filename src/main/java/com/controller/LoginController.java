@@ -101,9 +101,15 @@ public class LoginController {
     public void handleRegister () {
         String register_pass = register_password.getText();
         String register_firstname = register_name.getText();
-        userModel.setUser_pass(register_pass);
-        userModel.setUser_firstname(register_firstname);
-        userModel.updateModel();
-        goToLogin(primaryStage);
+        if ((register_firstname.equals("")) || (register_pass.equals(""))) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Mangler at indtaste navn og/eller kodeord");
+            alert.showAndWait();
+        }else {
+            userModel.setUser_pass(register_pass);
+            userModel.setUser_firstname(register_firstname);
+            userModel.updateModel();
+            goToLogin(primaryStage);
+        }
     }
 }
