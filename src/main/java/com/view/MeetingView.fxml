@@ -25,5 +25,10 @@
          </font>
       </Label>
       <ListView fx:id="potentialMeeting" layoutX="41.0" layoutY="51.0" prefHeight="115.0" prefWidth="519.0" />
+      <Label layoutX="245.0" layoutY="175.0" text="Dato for møde">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
