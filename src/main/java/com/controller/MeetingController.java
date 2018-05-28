@@ -35,7 +35,7 @@ public class MeetingController implements Initializable {
         for (int i = 0; i < studentList.size(); i++) {
             int readyForMeeting = Integer.parseInt(user_id[i]);
             if (readyForMeeting != 0) {
-                arranged_meetingList.add("Elev: "+studentList.get(i)+" møde dato: "+ meeting_time.get(i)+ " lokation: "+meeting_location.get(i));
+                arranged_meetingList.add("ElevID: "+studentList.get(i)+"    møde dato: "+ meeting_time.get(i)+ "    lokation: "+meeting_location.get(i));
 
             } else {
             }
