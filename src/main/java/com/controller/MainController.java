@@ -6,7 +6,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 
 public class MainController extends Application {
@@ -58,7 +57,7 @@ public class MainController extends Application {
 		try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainController.class
-					.getResource("/MeetingView.fxml"));
+					.getResource("/ArrangeMeetingView.fxml"));
             arrangeMeetingView = (AnchorPane) loader.load();
             Scene scene = new Scene(arrangeMeetingView);
             primaryStage.setScene(scene);
