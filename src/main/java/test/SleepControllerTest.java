@@ -19,21 +19,13 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class SleepControllerTest extends ApplicationTest {
+public class SleepControllerTest {
 
-    public FXMLLoader fxmlLoader = new FXMLLoader();
+    private SleepController sleepController;
 
-    @Override
-    public void start (Stage stage) throws Exception {
-        Parent mainNode = fxmlLoader.load(SleepController.class.getResource("PreviousSleepView.fxml"));
-        stage.setScene(new Scene(mainNode));
-        stage.show();
-        stage.toFront();
-    }
     @Before
     public void setUp () throws Exception {
-
-
+        sleepController = new SleepController();
     }
 
     @After
@@ -44,7 +36,6 @@ public class SleepControllerTest extends ApplicationTest {
 
     @Test
     public void testLineChart(){
-        MouseButton seIndData = null;
-        press(seIndData);
+
     }
 }

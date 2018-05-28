@@ -13,10 +13,19 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests the loginController class' UI.
+ * Contains the required method start, inherited form the the ApplicationTest, along with the method for testing the class, and a method for tearing down the FXToolKit.
+ */
 public class LoginControllerTest extends ApplicationTest {
 
 	public FXMLLoader fxmlLoader = new FXMLLoader();
 
+	/**
+	 * The main entry point for all JavaFX applications. The start method is called after the init method has returned, and after the system is ready for the application to begin running.
+	 * @param stage		The primary stage for this application, onto which the application scene can be set.
+	 * @throws Exception
+	 */
 	@Override
 	public void start (Stage stage) throws Exception {
 		Parent mainNode = fxmlLoader.load(LoginController.class.getResource("LoginView.fxml"));
@@ -25,11 +34,10 @@ public class LoginControllerTest extends ApplicationTest {
 		stage.toFront();
 	}
 
-	@Before
-	public void setUp () throws Exception {
-
-	}
-
+	/**
+	 * The final method the be called, after a test. Used to clear out the thread, and release the mouse/keyboard control from the JavaFX application
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown () throws Exception {
 		FxToolkit.hideStage();
@@ -37,6 +45,11 @@ public class LoginControllerTest extends ApplicationTest {
 		release(new MouseButton[]{});
 	}
 
+	/**
+	 * Tests the UI of loginView.
+	 * It creates two strings, one for username and one for the password.
+	 * Writes the strings on screen, and checks whether the input is detected in the controller.
+	 */
 	@Test
 	public void testUserInput () {
 		String username = "1";

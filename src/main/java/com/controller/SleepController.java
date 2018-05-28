@@ -128,8 +128,8 @@ public class SleepController implements Initializable {
         ObservableList<XYChart.Series> DataList = FXCollections.observableArrayList();
         XYChart.Series series = new XYChart.Series();
 
-        y.setLabel("sovet(min)");
-        x.setLabel("dag");
+        y.setLabel("Søvnlængde (timer)");
+        x.setLabel("Dag");
         long[] diff = new long[sleep_time.size()];
         String[] date_array = new String[sleep_time.size()];
 
@@ -151,11 +151,15 @@ public class SleepController implements Initializable {
                     diff[i] = diff[i] + diff[i - 1];
 
                 } else if (diff[i-1] != 0) {
-                    series.getData().add(new XYChart.Data<String, Number>("" + date_array[i - 1] + "", (Number) diff[i - 1]));
+                    float value = diff[i - 1];
+                    value = value / 60;
+                    series.getData().add(new XYChart.Data<String, Number>("" + date_array[i - 1] + "", (Number) value ));
                 }
 
                 if (sleep_time.size() - 1 == i && diff[i] != 0) {
-                    series.getData().add(new XYChart.Data<String, Number>("" + date_array[i] + "", (Number) diff[i]));
+                    float value = diff[i];
+                    value = value / 60;
+                    series.getData().add(new XYChart.Data<String, Number>("" + date_array[i] + "", (Number) value));
                 }
             }
         }
