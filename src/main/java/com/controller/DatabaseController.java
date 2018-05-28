@@ -42,7 +42,7 @@ class DatabaseController {
 		ArrayList<String> sleep_awoke_arry = new ArrayList<>();
 		try {
 
-			String SQL = ("SELECT sleep_time, awoke_time FROM sleepdata");
+			String SQL = ("SELECT sleep_time, awoke_time FROM sleepdata ORDER BY sleep_time");
 			connect().createStatement().executeQuery(SQL);
 			st = connect().createStatement();
 			rs = st.executeQuery(SQL);
@@ -70,7 +70,7 @@ class DatabaseController {
 		ArrayList<String> sleep_awoke_arry = new ArrayList<>();
 		try {
 
-			String SQL = ("SELECT * FROM sleepdata WHERE student_id= '" + student_id + "'");
+			String SQL = ("SELECT * FROM sleepdata WHERE student_id= '" + student_id + "' ORDER BY sleep_time ");
 			connect().createStatement().executeQuery(SQL);
 			st = connect().createStatement();
 			rs = st.executeQuery(SQL);
