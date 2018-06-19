@@ -82,6 +82,7 @@ public class SleepController implements Initializable {
 
     /**
      * Har til formål at udfylde listen med elever det har givet samtykke.
+     * Først udfyldes modellen studentListModel, og tilføjes dem til dropdown-menuen.
      */
     private void listChooseStudent() {
         list.removeAll(list);
@@ -91,8 +92,13 @@ public class SleepController implements Initializable {
         listChooseStudent.getItems().addAll(list);
     }
 
+    /**
+     * Har til formål at udfylde lineChart med data fra en individuel elev.
+     * Først hentes den valgte elev med getValue(), og hvis der er valgt en elev, en start dato og slut dato, hentes data for den elev.
+     * Det data, som er opvågningstidspunkter og sovetider tilføjes til lineChart'et.
+     */
     @FXML
-    private void handlePrevOKButton(ActionEvent event) throws SQLException {
+    private void handlePrevOKButton(ActionEvent event) {
         String elev = listChooseStudent.getValue();
 
         if ((elev != null) && (String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
@@ -108,21 +114,10 @@ public class SleepController implements Initializable {
         }
     }
 
-
-    public void ShowDate(ActionEvent event) {
-        startDatePicker = new DatePicker();
-        endDatePicker = new DatePicker();
-        LocalDate today = LocalDate.of(2018, Month.MAY, 14);
-        LocalDate localDate = today.minusWeeks(2);
-
-        // LocalDate today = LocalDate.now();
-        // LocalDate weeks = today.minusWeeks(1);
-
-        // startDatePicker.setValue(startDatePicker.getValue(now()).minusWeeks(2));
-        //endDatePicker.setValue(today);
-
-    }
-
+    /**
+     * Har til formål at udfylde listen emd elever og deaktivere startDatePicker, endDatePicker, listChooseStudent og displayValueBtn.
+     * Så udfyldes listen med elever med metoden listChooseStudent().
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listChooseStudent();
