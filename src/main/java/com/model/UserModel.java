@@ -98,7 +98,9 @@ class UserModel {
                     loadModel();
                     new MainController().goToMain();
                 } else {
-                    System.out.println("fejl");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Forkert brugernavn eller kode");
+                    alert.showAndWait();
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
