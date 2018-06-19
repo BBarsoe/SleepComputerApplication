@@ -91,7 +91,7 @@ class UserModel {
 
                 sql_login_username = rs.getString(1);
                 sql_login_pass = rs.getString(2);
-                if (sql_login_username.equalsIgnoreCase(user_name) && sql_login_pass.equalsIgnoreCase(user_password)) {
+                if (sql_login_username.equals(user_name) && sql_login_pass.equals(user_password)) {
 
                     System.out.println("Login success");
                     setUser_id(user_name);
