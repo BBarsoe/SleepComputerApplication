@@ -92,16 +92,22 @@ public class MeetingController implements Initializable {
     }
 
     /**
-     * Har til formål at ændret view'et til hovedmenuen, ved at kalde mainklassens medetode goToMain().
+     * Har til formål at ændret view'et til hovedmenuen, ved at kalde mainklassens medetode goToMain(), hvis der trykkes på "tilbage"-knappen.
      */
-    public void handleReturn(){
+    @FXML
+    private void handleReturn(){
          new MainController().goToMain();
     }
 
     /**
-     *
+     * Har til formål at tjekke hvilken elev der er valgt, og hvornår det møde ønskes.
+     * Første gennemgåes listen af elver de der har et møde eller ønsker et møde, holdes sammen med den elev der er valgt i dropdownmenuen.
+     * Tjekker om der er valgt en elev og om der er valgt et tidspunkt. Hvis det er tilfældet, opdateres meetingModel med metoden updateModel().
+     * Så oprettes en pop-up besked med de valgte informationer og vises for brugeren. Alternativt vises en besked for brugeren
+     * med informationer om at der skal vælges en dato og elev.
      */
-    public void handleRecommendMeetingButton(){
+    @FXML
+    private void handleRecommendMeetingButton(){
         for (int i=0; i < meetingModel.getParticipatingStudent_id().size(); i++) {
             if (meetingModel.getParticipatingStudent_id().get(i).equals(elevList.getValue())){
 
