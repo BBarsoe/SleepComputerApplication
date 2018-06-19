@@ -48,6 +48,11 @@ public class MeetingController implements Initializable {
         }
     }
 
+    /**
+     * I metoden handleSelectMeetingTimeButton() defineres en variable date af typen LocalDate, som er lig med selectMeetingTime.getValue,
+     * som læser den værdi der valgt i Datepickeren i MeetingView.
+     * Denne værdi retuneres.
+     */
    private LocalDate handleSelectMeetingTimeButton() {
         LocalDate date = selectMeetingTime.getValue();
         return date;
