@@ -51,7 +51,7 @@ public class MainController extends Application {
 	 * Med metoden goToMain() instanserers loader fra klassen FXMLLoader.
 	 * Herefter benyttes setLocation til at fortælle, hvilket view vi gerne vil benytte.
 	 * variablen mainView sættes til at være lig med dette view, som er et GridPane.
-	 * Der instanseres nu en Scene, som skal være mainView, hvorefter vises dette view.
+	 * Der instanseres nu en Scene, som skal være mainView, hvorefter vises dette view vises.
 	 * Hvis lokationen til viewet ikke kan findes smides der en IOException, hvor der bruges
 	 * printStackTrace, således man kan se hvad fejlen er og hvor i koden fejlen opstår.
 	 */
@@ -75,7 +75,7 @@ public class MainController extends Application {
 	 * Med metoden goToArrangeMeeting() instanserers loader fra klassen FXMLLoader.
 	 * Herefter benyttes setLocation til at fortælle, hvilket view vi gerne vil benytte.
 	 * variablen arrangeMeetingView sættes til at være lig med dette view, som er et AnchorPane.
-	 * Der instanseres nu en Scene, som skal være arrangeMeetingView, hvorefter dette view.
+	 * Der instanseres nu en Scene, som skal være arrangeMeetingView, hvorefter dette view vises.
 	 * Hvis lokationen til viewet ikke kan findes smides der en IOException, hvor der bruges
 	 * printStackTrace, således man kan se hvad fejlen er og hvor i koden fejlen opstår
 	 */
@@ -99,7 +99,7 @@ public class MainController extends Application {
 	 * Med metoden goToPreviousSleep() instanserers loader fra klassen FXMLLoader.
 	 * Herefter benyttes setLocation til at fortælle, hvilket view vi gerne vil benytte.
 	 * variablen previousSleepView sættes til at være lig med dette view, som er et AnchorPane.
-	 * Der instanseres nu en Scene, som skal være previousSleepView, hvorefter dette view.
+	 * Der instanseres nu en Scene, som skal være previousSleepView, hvorefter dette view vises.
 	 * Hvis lokationen til viewet ikke kan findes smides der en IOException, hvor der bruges
 	 * printStackTrace, således man kan se hvad fejlen er og hvor i koden fejlen opstår
 	 */
@@ -122,7 +122,7 @@ public class MainController extends Application {
 	 * Med metoden goToSleepHabits() instanserers loader fra klassen FXMLLoader.
 	 * Herefter benyttes setLocation til at fortælle, hvilket view vi gerne vil benytte.
 	 * variablen sleepHabitsView sættes til at være lig med dette view, som er et AnchorPane.
-	 * Der instanseres nu en Scene, som skal være sleepHabitsView, hvorefter dette view.
+	 * Der instanseres nu en Scene, som skal være sleepHabitsView, hvorefter dette view vises.
 	 * Hvis lokationen til viewet ikke kan findes smides der en IOException, hvor der bruges
 	 * printStackTrace, således man kan se hvad fejlen er og hvor i koden fejlen opstår
 	 */

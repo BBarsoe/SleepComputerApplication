@@ -56,7 +56,7 @@ public class LoginController {
      * Hvis lokationen til viewet ikke kan findes smides der en IOException, hvor der bruges
      * printStackTrace, således man kan se hvad fejlen er og hvor i koden fejlen opstår
      */
-    public void goToLogin(Stage primaryStage) {
+    void goToLogin(Stage primaryStage) {
         this.primaryStage = mainController.primaryStage;
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -83,7 +83,7 @@ public class LoginController {
      * printStackTrace, således man kan se hvad fejlen er og hvor i koden fejlen opstår
      */
 
-    public void goToRegister(Stage primaryStage) {
+    private void goToRegister(Stage primaryStage) {
         this.primaryStage = mainController.primaryStage;
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -103,7 +103,7 @@ public class LoginController {
      * der benyttes getText på disse to fields, som findes i LoginView. Variablerne gemmes i login_username og login_pass.
      * Herefter gives de som input parameterer til metoden validateID
      */
-	public void handleLogin() {
+	private void handleLogin() {
         String login_username = user_name.getText();
         String login_pass = user_pass.getText();
         validateID(login_username, login_pass);
@@ -113,7 +113,8 @@ public class LoginController {
      * Meotden handleLoginButton() kaldes når der trykkes på knappen login i LoginView. Denne metode kalder metoden
      * handleLogin().
      */
-	public void handleLoginButton () {
+    @FXML
+	private void handleLoginButton () {
         handleLogin();
 	}
 
@@ -121,7 +122,8 @@ public class LoginController {
      * Meotden handleGoToRegister() kaldes når der trykkes på kanppen register i LoginView. Denne metode kalder metoden goToRegsiter
      * og da der skal skiftes til en ny stage sættes primaryStage som input parameter.
      */
-	public void handleGoToRegister (){
+    @FXML
+	private void handleGoToRegister (){
         goToRegister(primaryStage);
     }
 
@@ -129,7 +131,8 @@ public class LoginController {
      * Metoden handleCancelButton() kaldes når der trykkes på knappen Cancel i RegisterView. Denne metode kalder metoden
      * goToLogin og da der skal skiftes til en ny stage sættes primaryStage som input parameter.
      */
-    public void handleCancelButton() {
+    @FXML
+    private void handleCancelButton() {
         goToLogin(primaryStage);
     }
 
@@ -137,7 +140,7 @@ public class LoginController {
      *Metoden validateID() har to input parametere som er login_userID og login_password. Disse to parameterer sættes
      * som inputs til metoden validateID, som kaldes fra klassen UserModel.
      */
-	public void validateID(String login_userID, String login_password){
+	private void validateID(String login_userID, String login_password){
         userModel.validateID(login_userID,login_password);
     }
 
@@ -153,7 +156,8 @@ public class LoginController {
      * Herefter kaldes metoden UpdateModel fra klassen UserModel. Herefter kaldes mmetoden goToLogin() med input parameteren
      * primaryStage, da viewet skifter fra RegisterView til LoginView.
      */
-    public void handleRegister() {
+    @FXML
+    private void handleRegister() {
         String register_pass = register_password.getText();
         String register_firstname = register_name.getText();
         if ((register_firstname.equals("")) || (register_pass.equals(""))) {
