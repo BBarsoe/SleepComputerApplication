@@ -71,7 +71,7 @@ public class MeetingController implements Initializable {
         ArrayList<String> studentList = meetingModel.getParticipatingStudent_id();
         ArrayList<String> user_id = meetingModel.getParticipatingCoordinator();
         for (int i = 0; i < studentList.size(); i++) {
-            if ( user_id.get(i) == "0" ){
+            if (user_id.get(i).equals("0")){
                 meetingList.removeAll(meetingList);
                 meetingList.addAll(studentList.get(i));
                 elevList.getItems().addAll(meetingList);
@@ -79,6 +79,9 @@ public class MeetingController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
             potentialMeeting.setItems(arranged_meetingList);
