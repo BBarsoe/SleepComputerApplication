@@ -19,8 +19,10 @@ class DatabaseController {
 	static StudentListModel studentListModel = new StudentListModel();
 
 	/**
-	 * Vi venter til at Andreas her er
-	 *
+	 * Har til formål at oprette en forbindelse til en database ved brug af JDBC driveren.
+	 * Først tjekke at driveren er inkluderet i projektbiblioteket, derefter anvendes JDBC driverens getConnection-
+	 * metode til at forsøge at oprette forbindelse til database. Hvis det løkkes returneres forbindelsen.
+	 * @return En database forbindelse.
 	 */
 	static Connection connect() {
 		try {
@@ -80,7 +82,7 @@ class DatabaseController {
 	}
 
 	/**
-	 * I metoden loadSleepModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet, disse sættes
+	 * I metoden loadSleepModel() defineres variablerne st og rs, som er af typerne Statement og ResulstSet, disse sættes
 	 * til at være lig null. Herefter defineres to ArrayLists sleep_time_array og sleep_awoke_array, som skal indeholde strings.
 	 * Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
 	 * hvor alle variablerne vælges fra tabellen sleepdata i databasen, hvor student_id er lig med det student_id, som er blevet givet som input parameter til metoden, de sorteres efter dato,
