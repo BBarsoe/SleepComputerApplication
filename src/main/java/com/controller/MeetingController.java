@@ -28,7 +28,7 @@ public class MeetingController implements Initializable {
      * Metoden handleShowMeetings() starter med at kalde loadModel() fra klassen MeetingModel.
      * Herefter defineres fire ArrayLists, ved studentList sættes data ind fra MeetingModel med metoden getParticipatingStudent_id.
      * Dette gøres også ved de andre ArrayLists med getMeetingTime, getParticipatingCoordinator og getMeetingLocation.
-     * Herefter benyttes en for løkke, så kører igennem for antalet elever der ønsker møde.
+     * Herefter benyttes en for løkke, som kører igennem for antalet elever der ønsker møde.
      * I for løkken er der en if løkke, hvor den er sand, hvis user_id ikke er lig med 0, hvilket betyder der er tildelt
      * en sundhedskoordinator. Hvis dette er sandt, benyttes add til arranged_meetingList, som tilføjer eleven med student_id
      * møde tidspunktet meeting_time og lokationen meeting_location.
@@ -62,7 +62,7 @@ public class MeetingController implements Initializable {
      * Metoden handlePotentialMeeting() starter med at kalde loadModel() fra klassen MeetingModel.
      * Herefter defineres 2 ArrayLists, ved studentList sættes data ind fra MeetingModel med metoden getParticipatingStudent_id.
      * Dette gøres også ved den anden ArrayList med getParticipatingCoordinator.
-     * Herefter benyttes en for løkke, så kører igennem for antalet elever der ønsker møde.
+     * Herefter benyttes en for løkke, som kører igennem for antalet af elever der ønsker møde.
      * I for løkken er der en if løkke, hvor den er sand, hvis user_id er lig med 0, hvilket betyder der ikke er tildelt
      * en sundhedskoordinator. Hvis dette er sandt, benyttes add til meetingList.
      */
@@ -80,7 +80,9 @@ public class MeetingController implements Initializable {
     }
 
     /**
-     *
+     * Har til formål at udfylde tabellen med arrangerede møder og dropdown menuen med forslået møder.
+     * Først udfyldes potentialMeeting med de elementer som findes i listen arranged_meetingList.
+     * Derefter kaldes handleShowMeetings() og handlePotentialMeeting().
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
