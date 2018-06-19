@@ -38,10 +38,24 @@ public class LoginController {
     @FXML
     private Button LoginButton = new Button();
 
-
+    /**
+     *Med metoden initialize() sættes knappen loginButton til at være den markerede knap, således man kan
+     * trykke enter når man vil logge ind.
+     */
     public void initialize(){
         LoginButton.setDefaultButton(true);
 	}
+
+    /**
+     * Med metoden goToLogin() sættes primaryStage til at være lig med variablen primarayStage i klassen mainController.
+     * Dette gøres for at ændre primaryStage til nu at være LoginView.
+     * Herefter instanserers loader fra klassen FXMLLoader.
+     * Herefter benyttes setLocation til at fortælle, hvilket view vi gerne vil benytte.
+     * variablen loginView sættes til at være lig med dette view, som er et AnchorPane.
+     * Der instanseres nu en Scene, som skal være loginView, hvorefter dette view vises.
+     * Hvis lokationen til viewet ikke kan findes smides der en IOException, hvor der bruges
+     * printStackTrace, således man kan se hvad fejlen er og hvor i koden fejlen opstår
+     */
     public void goToLogin(Stage primaryStage) {
         this.primaryStage = mainController.primaryStage;
         try {
