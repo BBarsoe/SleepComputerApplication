@@ -93,12 +93,12 @@ public class SleepController implements Initializable {
     }
 
     /**
-     * Har til formål at udfylde lineChart med data fra en individuel elev.
+     * Har til formål at give lineChart data fra en individuel elev.
      * Først hentes den valgte elev med getValue(), og hvis der er valgt en elev, en start dato og slut dato, hentes data for den elev.
      * Det data, som er opvågningstidspunkter og sovetider tilføjes til lineChart'et.
      */
     @FXML
-    private void handlePrevOKButton(ActionEvent event) {
+    private void handlePrevOKButton() {
         String elev = listChooseStudent.getValue();
 
         if ((elev != null) && (String.valueOf(startDatePicker) != null) && (String.valueOf(endDatePicker) != null)) {
@@ -106,11 +106,6 @@ public class SleepController implements Initializable {
             ArrayList<String> sleep_time = sleepModel.getSleep_time();
             ArrayList<String> sleep_awoke = sleepModel.getAwoke_time();
             LineChart(sleep_time, sleep_awoke);
-            //System.out.println(sleep_time);
-            //System.out.println(sleep_awoke);
-
-        } else {
-//            screen.setText("Elev eller datointerval ikke valgt");
         }
     }
 
@@ -121,15 +116,20 @@ public class SleepController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listChooseStudent();
-//        screen.setDisable(true);
         startDatePicker.setDisable(true);
         endDatePicker.setDisable(true);
         listChooseStudent.setDisable(true);
         displayValueBtn.setDisable(true);
     }
 
+    /**
+     * Har til formål at oprette et lineChart med data, angivet ved argumenterne sleep_time og awoke_time.
+     * Der oprettes en liste med XYChart, navngivet dataList, x og y labes sættes.
+     * Derefter laves en for løkke som for hvert element i sleep_time, beregner sovetiden mellem awoke_time og sleep_time.
+     * Disse data tilføjes i listen dataList, og dataList tilføjes til lineChart
+     */
     private void LineChart(ArrayList<String> sleep_time, ArrayList<String> awoke_time) {
-        ObservableList<XYChart.Series> DataList = FXCollections.observableArrayList();
+        ObservableList<XYChart.Series> dataList = FXCollections.observableArrayList();
         XYChart.Series series = new XYChart.Series();
 
         y.setLabel("Søvnlængde (timer)");
@@ -151,24 +151,24 @@ public class SleepController implements Initializable {
                 diff[i] = diff[i] + 1440; // 24 timer
 
             if (i > 0) {
-                if (date_array[i - 1].equals(date_array[i])) {
+                if (date_array[i - 1].equals(date_array[i])) { // Tjekker om man er gået i seng to gange på et døgn, hvis det er sandt, lægger dem sammen.
                     diff[i] = diff[i] + diff[i - 1];
 
-                } else if (diff[i-1] != 0) {
+                } else if (diff[i-1] != 0) { // Tjekker om det er sovet, og hvis det er sandt, tilføjes data til series
                     float value = diff[i - 1];
                     value = value / 60;
                     series.getData().add(new XYChart.Data<String, Number>("" + date_array[i - 1] + "", (Number) value ));
                 }
 
-                if (sleep_time.size() - 1 == i && diff[i] != 0) {
+                if (sleep_time.size() - 1 == i && diff[i] != 0) { // Hvis det er det sidste element i søvndata, og det ikke er nul, tilføjes data til series
                     float value = diff[i];
                     value = value / 60;
                     series.getData().add(new XYChart.Data<String, Number>("" + date_array[i] + "", (Number) value));
                 }
             }
         }
-        DataList.addAll(series);
-        PreviousSleep.setData(DataList);
+        dataList.addAll(series);
+        PreviousSleep.setData(dataList);
 
     }
 }
