@@ -249,6 +249,19 @@ class DatabaseController {
 
 	}
 
+	/**
+	 * I metoden updateModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet, disse sættes
+	 * til at være lig null. Herefter defineres variablen sql_pass, som er af datatypen String.
+	 * Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
+	 * hvor varibalerne user_pass og user_firstname indsættes i tabellen healthcoordinator i databasen, med værdierne user_pass og user_firstname, som er input parameterne til metoden.
+	 * Herefter benyttes createStatement, som pakker variablen SQL således den kan læses af databasen. executeUpdate sender sql statmentent til databasen, her renuteres der ikke noget.
+	 * Der laves en SQL2, hvor user_id vælges fra healthcoordinator, hvor user_pass er lig med det user_pass der er skrevet ind. Det samme gælder for user_firstname.
+	 * Der bruges ORDER BY user_id DESC, da hvis en person opretter sig med samme navn og password som en anden, vil personen få tildelt det rigtige user_id.
+	 * Dette ResultSet der reunteres gemmes i varaiblen rs. Herefter benyttes en if løkke, hvor rs.next() læser den række der bliver retuneret
+	 * fra  databasen. Her instanseres en Alert af typen INFORMATION, med teksten "Dette er dit brugerID: ID" ved ID bruges rs.getString(1) som retunere det der står på søjle 1.
+	 * Der bruges alert.show, så ledes information boksen vises for brugeren.
+	 * Hvis der sker en fejl når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejl.
+	 */
 	public static void updateModel(String user_pass, String user_firstname) {
 		Statement st = null;
 		ResultSet rs = null;
@@ -264,7 +277,6 @@ class DatabaseController {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setContentText("Dette er dit brugerID: " + rs.getString(1));
 				alert.show();
-				loadUserModel(rs.getString(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -273,6 +285,13 @@ class DatabaseController {
 
 	}
 
+	/**
+	 *I metoden updateMeetingModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet, disse sættes
+	 *til at være lig null. Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
+	 *hvor der benyttes UPDATE af tabellen meeting i databasen, hvor meeting_time sættes til at være lig med det valgte møde tidspunkt, user_id sættes til at være lig med sundhedskoordintorens id for den student
+	 * der er blevet valgt.
+	 * Hvis der sker en fejl når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejl.
+	 */
 	public static void updateMeetingModel(String student_id, String user_id, LocalDate meetingDate) {
 		Statement st = null;
 		ResultSet rs = null;
