@@ -128,8 +128,7 @@ public class MeetingController implements Initializable {
 
                 }
             }
-            }
         }
-
+    }
 }
 
