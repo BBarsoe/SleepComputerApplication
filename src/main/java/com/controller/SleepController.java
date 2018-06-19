@@ -46,6 +46,9 @@ public class SleepController implements Initializable {
     private ChoiceBox<String> listChooseStudent;
 
 
+    /**
+     * Har til formål give mulighed for at kunne bruge datePicker start og end og listen over elever.
+     */
     @FXML
     private void handleIndData() {
         startDatePicker.setDisable(false);
@@ -54,6 +57,10 @@ public class SleepController implements Initializable {
         displayValueBtn.setDisable(false);
     }
 
+    /**
+     * Har til formål give mulighed for at kunne bruge datePicker start og end og listen over elever.
+     * Udfylder linechartet med det data der findes i sleepModel.
+     */
     @FXML
     private void handlePopData() {
         startDatePicker.setDisable(false);
