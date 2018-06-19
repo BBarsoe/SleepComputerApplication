@@ -33,8 +33,7 @@ public class MeetingController implements Initializable {
         ArrayList<String> meeting_location = meetingModel.getMeetingLocation();
 
         for (int i = 0; i < studentList.size(); i++) {
-            String readyForMeeting = user_id.get(i);
-            if (readyForMeeting != "0") {
+            if (user_id.get(i) != "0") {
                 arranged_meetingList.add("ElevID: "+studentList.get(i)+"    møde dato: "+ meeting_time.get(i)+ "    lokation: "+meeting_location.get(i));
 
             } else {
