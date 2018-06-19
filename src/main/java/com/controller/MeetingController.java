@@ -91,10 +91,16 @@ public class MeetingController implements Initializable {
             handlePotentialMeeting();
     }
 
+    /**
+     * Har til formål at ændret view'et til hovedmenuen, ved at kalde mainklassens medetode goToMain().
+     */
     public void handleReturn(){
          new MainController().goToMain();
     }
 
+    /**
+     *
+     */
     public void handleRecommendMeetingButton(){
         for (int i=0; i < meetingModel.getParticipatingStudent_id().size(); i++) {
             if (meetingModel.getParticipatingStudent_id().get(i).equals(elevList.getValue())){
