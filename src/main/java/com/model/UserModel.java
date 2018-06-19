@@ -71,8 +71,11 @@ class UserModel {
     }
 
     /**
-     *  Har til formål at tjekke om en bruger findes i databasen med det indtastede brugernavn og kodeord.
-     *
+     * Har til formål at tjekke om en bruger findes i databasen med det indtastede brugernavn og kodeord.
+     * Der oprettes en SQL statement hvor der spørges efter user_name og user_password. Hvis det returnede data fra databasen
+     * matcher det user_name og user_password som brugeren har indskrevet, ændres viewet til hovedmenuen.
+     * Hvis det returnede data ikke mathcer det user_name og user_password som brugeren har indskrevet, oprettes en pop-up besked
+     * som informere brugeren om forkert loginoplysninger.
      */
     public void validateID(String user_name, String user_password) {
         Statement st = null;
