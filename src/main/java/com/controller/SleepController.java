@@ -72,12 +72,18 @@ public class SleepController implements Initializable {
         LineChart(sleep_time, sleep_awoke);
     }
 
+    /**
+     * Har til formål at ændret view'et til hovedmenuen, ved at kalde mainklassens medetode goToMain(), hvis der trykkes på "tilbage"-knappen.
+     */
     @FXML
     private void handlePrevReturnButton() {
         new MainController().goToMain();
     }
 
-    private void listChooseStudent() throws SQLException {
+    /**
+     * Har til formål at udfylde listen med elever det har givet samtykke.
+     */
+    private void listChooseStudent() {
         list.removeAll(list);
         studentListModel.loadModel();
         ArrayList<String> studentList = StudentListModel.studentList_id;
@@ -119,11 +125,7 @@ public class SleepController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            listChooseStudent();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        listChooseStudent();
 //        screen.setDisable(true);
         startDatePicker.setDisable(true);
         endDatePicker.setDisable(true);
