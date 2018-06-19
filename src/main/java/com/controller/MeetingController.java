@@ -59,16 +59,19 @@ public class MeetingController implements Initializable {
    }
 
     /**
-     *  Har til formål at skabe en list af elever som ønsker et møde.
-     *  Opretter to arrrays med oversigter over alle elever som har et møde, og alle SK'er som tilhøre det møde
+     * Metoden handlePotentialMeeting() starter med at kalde loadModel() fra klassen MeetingModel.
+     * Herefter defineres 2 ArrayLists, ved studentList sættes data ind fra MeetingModel med metoden getParticipatingStudent_id.
+     * Dette gøres også ved den anden ArrayList med getParticipatingCoordinator.
+     * Herefter benyttes en for løkke, så kører igennem for antalet elever der ønsker møde.
+     * I for løkken er der en if løkke, hvor den er sand, hvis user_id er lig med 0, hvilket betyder der ikke er tildelt
+     * en sundhedskoordinator. Hvis dette er sandt, benyttes add til meetingList.
      */
     private void handlePotentialMeeting() {
         meetingModel.loadModel();
         ArrayList<String> studentList = meetingModel.getParticipatingStudent_id();
         ArrayList<String> user_id = meetingModel.getParticipatingCoordinator();
         for (int i = 0; i < studentList.size(); i++) {
-            String readyForMeeting = user_id.get(i);
-            if ( readyForMeeting == "0" ){
+            if ( user_id.get(i) == "0" ){
                 meetingList.removeAll(meetingList);
                 meetingList.addAll(studentList.get(i));
                 elevList.getItems().addAll(meetingList);
