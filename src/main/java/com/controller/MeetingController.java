@@ -25,13 +25,13 @@ public class MeetingController implements Initializable {
     public ListView potentialMeeting;
 
     /**
-     * Metoden handleShowMeetings() starter med at kalde loadModel() fra klassen MeetingModel.
-     * Herefter defineres fire ArrayLists, ved studentList sættes data ind fra MeetingModel med metoden getParticipatingStudent_id.
+     * Metoden handleShowMeetings() starter med at kalde loadModel() fra klassen MeetingModel. Herefter defineres
+     * fire ArrayLists. Ved studentList sættes data ind fra MeetingModel med metoden getParticipatingStudent_id.
      * Dette gøres også ved de andre ArrayLists med getMeetingTime, getParticipatingCoordinator og getMeetingLocation.
-     * Herefter benyttes en for løkke, som kører igennem for antalet elever der ønsker møde.
-     * I for løkken er der en if løkke, hvor den er sand, hvis user_id ikke er lig med 0, hvilket betyder der er tildelt
-     * en sundhedskoordinator. Hvis dette er sandt, benyttes add til arranged_meetingList, som tilføjer eleven med student_id
-     * møde tidspunktet meeting_time og lokationen meeting_location.
+     * Herefter benyttes en for løkke, som kører igennem for antallet af elever, der ønsker et møde.
+     * I for løkken er der en if løkke, hvor den er sand, hvis user_id ikke er lig 0, hvilket betyder, at der er
+     * tildelt en sundhedskoordinator. Hvis dette er sandt, benyttes add til arranged_meetingList, som tilføjer eleven
+     * med student_id, mødetidspunktet meeting_time og lokationen meeting_location.
      */
     private void handleShowMeetings() {
         meetingModel.loadModel();
@@ -49,9 +49,9 @@ public class MeetingController implements Initializable {
     }
 
     /**
-     * I metoden handleSelectMeetingTimeButton() defineres en variable date af typen LocalDate, som er lig med selectMeetingTime.getValue,
-     * som læser den værdi der valgt i Datepickeren i MeetingView.
-     * Denne værdi retuneres.
+     * I metoden handleSelectMeetingTimeButton() defineres en variable, der kaldes date af typen LocalDate,
+     * som er lig selectMeetingTime.getValue. Denne læser den værdi, der valgt i Datepickeren i MeetingView.
+     * Denne værdi returneres.
      */
    private LocalDate handleSelectMeetingTimeButton() {
         LocalDate date = selectMeetingTime.getValue();
@@ -59,11 +59,11 @@ public class MeetingController implements Initializable {
    }
 
     /**
-     * Metoden handlePotentialMeeting() starter med at kalde loadModel() fra klassen MeetingModel.
-     * Herefter defineres 2 ArrayLists, ved studentList sættes data ind fra MeetingModel med metoden getParticipatingStudent_id.
+     * Metoden handlePotentialMeeting() starter med at kalde loadModel() fra klassen MeetingModel. Herefter defineres
+     * to ArrayLists. Ved studentList sættes data ind fra MeetingModel med metoden getParticipatingStudent_id.
      * Dette gøres også ved den anden ArrayList med getParticipatingCoordinator.
-     * Herefter benyttes en for løkke, som kører igennem for antalet af elever der ønsker møde.
-     * I for løkken er der en if løkke, hvor den er sand, hvis user_id er lig med 0, hvilket betyder der ikke er tildelt
+     * Herefter benyttes en for løkke, som kører igennem for antallet af elever, der ønsker et møde. I for løkken er
+     * der en if løkke, hvor den er sand, hvis user_id er lig med 0, hvilket betyder, at der ikke er tildelt
      * en sundhedskoordinator. Hvis dette er sandt, benyttes add til meetingList.
      */
     private void handlePotentialMeeting() {
@@ -80,8 +80,8 @@ public class MeetingController implements Initializable {
     }
 
     /**
-     * Har til formål at udfylde tabellen med arrangerede møder og dropdown menuen med forslået møder.
-     * Først udfyldes potentialMeeting med de elementer som findes i listen arranged_meetingList.
+     * Denne metode har til formål at udfylde tabellen med arrangerede møder og dropdown menuen med forslået møder.
+     * Først udfyldes potentialMeeting med de elementer, som findes i listen arranged_meetingList.
      * Derefter kaldes handleShowMeetings() og handlePotentialMeeting().
      */
     @Override
@@ -92,7 +92,8 @@ public class MeetingController implements Initializable {
     }
 
     /**
-     * Har til formål at ændret view'et til hovedmenuen, ved at kalde mainklassens medetode goToMain(), hvis der trykkes på "tilbage"-knappen.
+     * Denne metode har til formål at ændret viewet til hovedmenuen ved at kalde mainklassens medetode
+     * goToMain(), hvis der trykkes på tilbage knappen.
      */
     @FXML
     private void handleReturn(){
@@ -100,11 +101,12 @@ public class MeetingController implements Initializable {
     }
 
     /**
-     * Har til formål at tjekke hvilken elev der er valgt, og hvornår det møde ønskes.
-     * Første gennemgåes listen af elver der har et møde eller ønsker et møde, og holdes sammen med den elev der er valgt i dropdownmenuen.
-     * Tjekker om der er valgt en elev og om der er valgt et tidspunkt. Hvis det er tilfældet, opdateres meetingModel med metoden updateModel().
-     * Så oprettes en pop-up besked med de valgte informationer og vises for brugeren. Alternativt vises en besked for brugeren
-     * med informationer om at der skal vælges en dato og elev.
+     * Denne metode har til formål at tjekke, hvilken elev, der er valgt, og hvornår et møde ønskes.
+     * Første gennemgåes listen af elver, der har et møde eller ønsker et møde, og det holdes sammen med den elev,
+     * der er valgt i dropdownmenuen. Dernæst tjekkes det, om der er valgt en elev, og om der er valgt et tidspunkt.
+     * Hvis det er tilfældet, opdateres meetingModel med metoden updateModel(). Dernæst oprettes en pop-up besked
+     * med de valgte informationer, og det vises for brugeren. Alternativt vises en besked for brugeren
+     * med informationer om, at der skal vælges en dato og elev.
      */
     @FXML
     private void handleRecommendMeetingButton(){

@@ -17,10 +17,10 @@ class DatabaseController {
 	static StudentListModel studentListModel = new StudentListModel();
 
 	/**
-	 * Har til formål at oprette en forbindelse til en database ved brug af JDBC driveren.
-	 * Først tjekke at driveren er inkluderet i projektbiblioteket, derefter anvendes JDBC driverens getConnection-
-	 * metode til at forsøge at oprette forbindelse til database. Hvis det løkkes returneres forbindelsen.
-	 * @return En database forbindelse.
+	 * Formålet med denne metode er at oprette en forbindelse til en database ved brug af JDBC driveren.
+	 * Først tjekkes det, at driveren er inkluderet i projektbiblioteket. Derefter anvendes JDBC driverens
+	 * getConnection-metode til at forsøge at oprette forbindelse til databasen.
+	 * Hvis det lykkes, returneres forbindelsen.
 	 */
 	static Connection connect() {
 		try {
@@ -40,18 +40,20 @@ class DatabaseController {
 	}
 
 	/**
-	 * I metoden loadPopSleepModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet, disse sættes
-	 * til at være lig null. Herefter defineres to ArrayLists sleep_time_array og sleep_awoke_array, som skal indeholde strings.
-	 * Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
-	 * hvor variablerne sleep_time og awoke_time vælges fra tabellen sleepdata i databasen, hvor de sorteres efter dato, hvor den ældste komemr først.
-	 * Herefter benyttes createStatement, som pakker variablen SQL således den kan læses af databasen. executeQuery sender sql statmentent og retunere
-	 * et ResultSet fra databasen. Dette ResultSet gemmes i varaiblen rs. Herefter benyttes en while løkke, hvor rs.next() læser hver række der er
-	 * blevet retuneret fra  databasen. Her defineres to variabler af typen String, hvor der i sleep_time gemmes det der står på søjle 1
-	 * og i awoke_time det der står i søjle to. Herefter gemmes disse værdier i hver deres arrayList.
-	 * Efter alle rækkerne er blevet gemt i arrayListen, kaldes setAwoke_time og setSleep_time fra klassen SleepModel.
-	 * i sleepModel.setAwoke_time gemmes arrayListen sleep_awoke_array og i sleepModel.setSleep_time gemmes arrayListen
-	 * sleep_time_array.
-	 * Hvis der sker en fejl når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejl.
+	 * I metoden loadPopSleepModel() defineres variablerne st og rs, som er af typerne Statement og ResultSet.
+	 * Disse sættes til at være lig null. Herefter defineres to ArrayLists: sleep_time_array og sleep_awoke_array,
+	 * som skal indeholde strings. Der laves et SQL kald og en try-catch, således eventuelle fejl kan fanges.
+	 * I try defineres en variabel kaldt SQL af typen String, som sættes til at være et SQL statement, hvor
+	 * variablerne sleep_time og awoke_time vælges fra tabellen sleepdata i databasen. De sorteres efter dato,
+	 * hvor den ældste vises først. Herefter benyttes createStatement, som pakker variablen SQL, således den kan
+	 * læses af databasen. executeQuery sender sql statmententet og retunerer et ResultSet fra databasen.
+	 * Dette ResultSet gemmes i variablen rs. Herefter benyttes en while løkke, hvor rs.next() læser hver række,
+	 * der er blevet returneret fra  databasen. Her defineres to variabler af typen String, og i sleep_time
+	 * gemmes det, der står på i 1, og i awoke_time gemmes det, der står i søjle to. Herefter gemmes disse værdier
+	 * i hver deres arrayList. Efter alle rækkerne er blevet gemt i arrayListen, kaldes setAwoke_time og
+	 * setSleep_time fra klassen SleepModel. I sleepModel.setAwoke_time gemmes arrayListen sleep_awoke_array,
+	 * og i sleepModel.setSleep_time gemmes arrayListen sleep_time_array. Hvis der sker en fejl,
+	 * når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejlmeddelse.
 	 */
 
 	public static void loadPopSleepModel() {
@@ -80,19 +82,22 @@ class DatabaseController {
 	}
 
 	/**
-	 * I metoden loadSleepModel() defineres variablerne st og rs, som er af typerne Statement og ResulstSet, disse sættes
-	 * til at være lig null. Herefter defineres to ArrayLists sleep_time_array og sleep_awoke_array, som skal indeholde strings.
-	 * Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
-	 * hvor alle variablerne vælges fra tabellen sleepdata i databasen, hvor student_id er lig med det student_id, som er blevet givet som input parameter til metoden, de sorteres efter dato,
-	 * hvor den ældste komemr først.
-	 * Herefter benyttes createStatement, som pakker variablen SQL således den kan læses af databasen. executeQuery sender sql statmentent og retunere
-	 * et ResultSet fra databasen. Dette ResultSet gemmes i varaiblen rs. Herefter benyttes en while løkke, hvor rs.next() læser hver række der er
-	 * blevet retuneret fra  databasen. Her defineres tre variabler, hvor der i student_id gemmes det der står i søjle 1 og sleep_time gemmes det der står på søjle 2
-	 * og i awoke_time det der står i søjle 3. Herefter gemmes disse værdier i hver deres arrayList borset fra student_id der gemmes i SleepModel med metoden setStudent_id.
-	 * Efter alle rækkerne er blevet gemt i arrayListen, kaldes setAwoke_time og setSleep_time fra klassen SleepModel.
-	 * i sleepModel.setAwoke_time gemmes arrayListen sleep_awoke_array og i sleepModel.setSleep_time gemmes arrayListen
-	 * sleep_time_array.
-	 * Hvis der sker en fejl når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejl.
+	 * I metoden loadSleepModel() defineres variablerne st og rs, som er af typerne Statement og ResulstSet.
+	 * Disse sættes til at være lig null. Herefter defineres to ArrayLists sleep_time_array og sleep_awoke_array,
+	 * som skal indeholde strings. Der laves et SQL kald og en try-catch, således eventuelle fejl
+	 * kan fanges. I try defineres en variabel SQL af typen String, som sættes til at være et SQL statement. Alle
+	 * variablerne vælges fra tabellen sleepdata i databasen, hvor student_id er lig med det student_id, som er
+	 * blevet givet som input parameter til metoden. De sorteres efter dato, hvor den ældste vises først.
+	 * Herefter benyttes createStatement, som pakker variablen SQL, således den kan læses af databasen.
+	 * executeQuery sender sql statmentent og retunerer et ResultSet fra databasen. Dette ResultSet gemmes i
+	 * variablen rs. Herefter benyttes en while løkke, hvor rs.next() læser hver række, der er blevet returneret
+	 * fra databasen. Her defineres tre variabler, hvor der i student_id gemmes det, der står i søjle 1,
+	 * og i sleep_time gemmes det, der står på søjle 2, og i awoke_time gemmes det, der står i søjle 3. Herefter
+	 * gemmes disse værdier i hver deres arrayList bortset fra student_id, der gemmes i SleepModel med metoden
+	 * setStudent_id. Efter alle rækkerne er blevet gemt i arrayListen, kaldes setAwoke_time og setSleep_time
+	 * fra klassen SleepModel. I sleepModel.setAwoke_time gemmes arrayListen sleep_awoke_array, og i
+	 * sleepModel.setSleep_time gemmes arrayListen sleep_time_array. Hvis der sker en fejl, når SQL statementet
+	 * sendes til databasen, fanges fejlen ved en SQLException, som printer en fejlmeddelelse.
 	 */
 	public static void loadSleepModel(String student_id) {
 		Statement st = null;
@@ -122,19 +127,22 @@ class DatabaseController {
 	}
 
 	/**
-	 * I metoden loadMeetingModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet, disse sættes
-	 * til at være lig null. Herefter defineres fire ArrayLists: participatingStudent, meeting_time, meeting_location og participatingCoordinatorm hvor alle undtagen meeting_time skal indeholde strings og meeting_time
-	 * skal indeholde data af typen Date.
-	 * Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
-	 * hvor alle variablerne vælges fra tabellen meeting i databasen.
-	 * Herefter benyttes createStatement, som pakker variablen SQL således den kan læses af databasen. executeQuery sender sql statmentent og retunere
-	 * et ResultSet fra databasen. Dette ResultSet gemmes i varaiblen rs. Herefter benyttes en while løkke, hvor rs.next() læser hver række der er
-	 * blevet retuneret fra  databasen. Her defineres fire variabler, hvor der i student_id gemmes det der står i søjle 2 og participatingCoordinator_id gemmes det der står på søjle 3
-	 * og i meetingTime gemmes det der står i søjle 1 og i meetingLocation gemmes det der står i søjle 4.
-	 * Herefter gemmes disse værdier i hver deres arrayList.
-	 * Efter alle rækkerne er blevet gemt i arrayListenerne, kaldes setParticipatingCoordinator, setMeetingTime, setparticipatingStudent_id og setMeetingLocation fra klassen MeetingModel.
-	 * Dette gør at alt data gemmes i klassen MeetingModel.
-	 * Hvis der sker en fejl når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejl.
+	 * I metoden loadMeetingModel() defineres variablerne st og rs, som er af typerne Statement og ResulstSet.
+	 * Disse sættes til at være lig null.Herefter defineres fire ArrayLists: participatingStudent, meeting_time,
+	 * meeting_location og participatingCoordinator, hvor alle undtagen meeting_time skal indeholde strings
+	 * og meeting_time skal indeholde data af typen Date.
+	 * Der laves et SQL kald og en try-catch, således eventuelle fejl. I try defineres en variabel SQL af
+	 * typen String, som sættes til at være et SQL statement. Alle variablerne vælges fra tabellen meeting i databasen.
+	 * Herefter benyttes createStatement, som pakker variablen SQL, således den kan læses af databasen.
+	 * executeQuery sender sql statmentent og returnerer et ResultSet fra databasen. Dette ResultSet gemmes i
+	 * variablen rs. Herefter benyttes en while løkke, hvor rs.next() læser hver række, der er
+	 * blevet returneret fra  databasen. Her defineres fire variabler, hvor der i student_id gemmes det, der står
+	 * i søjle 2, og i participatingCoordinator_id gemmes det, der står på søjle 3. I meetingTime gemmes det,
+	 * der står i søjle 1, og i meetingLocation gemmes det, der står i søjle 4. Herefter gemmes disse værdier i
+	 * hver deres arrayList. Efter alle rækkerne er blevet gemt i arrayListenerne, kaldes setParticipatingCoordinator,
+	 * setMeetingTime, setparticipatingStudent_id og setMeetingLocation fra klassen MeetingModel. Dette medfører,
+	 * at alt data gemmes i klassen MeetingModel. Hvis der sker en fejl, når SQL statmentet sendes til databasen,
+	 * fanges fejlen ved en SQLException, som printer en fejlmeddelse.
 	 */
 	public static void loadMeetingModel() {
 		Statement st = null;
@@ -208,18 +216,21 @@ class DatabaseController {
 	}
 
 	/**
-	 * I metoden loadUserModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet, disse sættes
+	 * I metoden loadUserModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet. Disse sættes
 	 * til at være lig null. Herefter defineres variablerne user_pass og user_firstname, som er af datatypen String.
-	 * Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
-	 * hvor alle variabler vælges fra tabellen healthcoordinator i databasen, hvor user_id er lig med det user_id der er givet som input til metoden.
-	 * Herefter benyttes createStatement, som pakker variablen SQL således den kan læses af databasen. executeQuery sender sql statmentent og retunere
-	 * et ResultSet fra databasen. Dette ResultSet gemmes i varaiblen rs. Herefter benyttes en if løkke, hvor rs.next() læser den række der bliver retuneret
-	 * fra  databasen. Her defineres variablerne user_id, user_pass og user_firstname af typen String, hvor der gemmes det der står i søjle 1 på user_id
-	 * og det der står i søjle 2 gemmes i user_pass og det der står i søjle 3 gemmes i user_firstname.
-	 * Efter rækken er blevet gemt i de tre variabler, kaldes setUser_id, setUser_pass og setUser_firstname fra klassen UserModel.
-	 * Disse metoder gemmer de retunerede værdier fra databasen i variablerne user_id, user_pass og user_firstname i klassen UserModel.
-	 * Hvis der ikke retuneres noget fra databsen printes der en String ud der skriver "fejl".
-	 * Hvis der sker en fejl når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejl.
+	 * Der laves et SQL kald og en try-catch, således eventuelle fejl kan fanges. I try defineres en variabel, som
+	 * kaldes SQL af typen String. Denne sættes til at et være SQL et statement. Alle variabler vælges fra
+	 * tabellen healthcoordinator i databasen, hvor user_id er lig det user_id, der er givet som input til metoden.
+	 * Herefter benyttes createStatement, som pakker variablen SQL, således den kan læses af databasen.
+	 * executeQuery sender sql statmentent og retunerer et ResultSet fra databasen. Dette ResultSet gemmes i
+	 * variablen rs. Herefter benyttes en if løkke, hvor rs.next() læser den række, der bliver returneret fra
+	 * databasen. Her defineres variablerne user_id, user_pass og user_firstname af typen String. Det der står i
+	 * søjle 1 gemmes i user_id, det der står i søjle 2 gemmes i user_pass, og det der står i søjle 3 gemmes i
+	 * user_firstname. Efter rækken er blevet gemt i de tre variabler, kaldes setUser_id, setUser_pass og
+	 * setUser_firstname fra klassen UserModel. Disse metoder gemmer de returnerede værdier fra databasen i
+	 * variablerne user_id, user_pass og user_firstname i klassen UserModel. Hvis der ikke returneres noget fra
+	 * databasen, printes en String, der skriver "fejl". Hvis der sker en fejl, når SQL statmentet sendes til
+	 * databasen, fanges fejlen ved en SQLException, som printer en fejlmeddelelse.
 	 */
 	public static void loadUserModel(String user_id) {
 		Statement st = null;
@@ -250,17 +261,22 @@ class DatabaseController {
 	}
 
 	/**
-	 * I metoden updateModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet, disse sættes
-	 * til at være lig null. Herefter defineres variablen sql_pass, som er af datatypen String.
-	 * Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
-	 * hvor varibalerne user_pass og user_firstname indsættes i tabellen healthcoordinator i databasen, med værdierne user_pass og user_firstname, som er input parameterne til metoden.
-	 * Herefter benyttes createStatement, som pakker variablen SQL således den kan læses af databasen. executeUpdate sender sql statmentent til databasen, her renuteres der ikke noget.
-	 * Der laves en SQL2, hvor user_id vælges fra healthcoordinator, hvor user_pass er lig med det user_pass der er skrevet ind. Det samme gælder for user_firstname.
-	 * Der bruges ORDER BY user_id DESC, da hvis en person opretter sig med samme navn og password som en anden, vil personen få tildelt det rigtige user_id.
-	 * Dette ResultSet der reunteres gemmes i varaiblen rs. Herefter benyttes en if løkke, hvor rs.next() læser den række der bliver retuneret
-	 * fra  databasen. Her instanseres en Alert af typen INFORMATION, med teksten "Dette er dit brugerID: ID" ved ID bruges rs.getString(1) som retunere det der står på søjle 1.
-	 * Der bruges alert.show, så ledes information boksen vises for brugeren.
-	 * Hvis der sker en fejl når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejl.
+	 * I metoden updateModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet. Disse sættes
+	 * til at være lig null. Herefter defineres variablen sql_pass, som er af datatypen String. Der laves et SQL kald,
+	 * og en try-catch, således eventuelle fejl kan fanges. I try defineres en variabel, som kaldes SQL af typen
+	 * String, som sættes til at et SQL statement. Her indsættes varibalerne user_pass og user_firstname i tabellen
+	 * healthcoordinator i databasen med værdierne user_pass og user_firstname, som er input parametre til metoden.
+	 * Herefter benyttes createStatement, som pakker variablen SQL, således den kan læses af databasen.
+	 * executeUpdate sender sql statementet til databasen, og her returneres ikke noget.
+	 * Der laves en SQL2, hvor user_id vælges fra healthcoordinator, hvor user_pass er lig med det user_pass, der
+	 * er skrevet ind. Det samme gælder for user_firstname. Der bruges ORDER BY user_id DESC, da en person, der
+	 * registrerer sig med samme navn og kode, som en anden der allerede findes, vil få tildelt et user_id, der ikke
+	 * er det id, som personen der allerede findes har. Det ResultSet der returneres, gemmes i varaiblen rs.
+	 * Herefter benyttes en if løkke, hvor rs.next() læser den række, der bliver returnerse fra  databasen.
+	 * Her instanseres en Alert af typen INFORMATION med teksten "Dette er dit brugerID: ID". Ved ID bruges
+	 * rs.getString(1) som returnerer det, der står på søjle 1. Der bruges alert.show, således informationboksen
+	 * vises for brugeren. Hvis der sker en fejl, når SQL statementet sendes til databasen, fanges fejlen ved en
+	 * SQLException, som printer en fejlmeddelelse.
 	 */
 	public static void updateModel(String user_pass, String user_firstname) {
 		Statement st = null;
@@ -286,11 +302,13 @@ class DatabaseController {
 	}
 
 	/**
-	 *I metoden updateMeetingModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet, disse sættes
-	 *til at være lig null. Der laves et SQL kald, derfor laves der en try/catch, således eventuelle fejl kan fanges. I try defineres en variable SQL af typen String, som sættes til at et SQL statement
-	 *hvor der benyttes UPDATE af tabellen meeting i databasen, hvor meeting_time sættes til at være lig med det valgte møde tidspunkt, user_id sættes til at være lig med sundhedskoordintorens id for den student
-	 * der er blevet valgt.
-	 * Hvis der sker en fejl når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException, som printer en fejl.
+	 * I metoden updateMeetingModel() defineres variablerne st og rs, som er af typerne Statement og ReulstSet.
+	 * Disse sættes til at være lig null. Der laves et SQL kald og en try-catch, således eventuelle fejl kan fanges.
+	 * I try defineres en variabel, hvilken kaldes SQL af typen String, som sættes til at være et SQL statement. Her
+	 * benyttes UPDATE af tabellen meeting i databasen, hvor meeting_time sættes til at være lig med det valgte
+	 * møde-tidspunkt, og user_id sættes til at være lig med sundhedskoordintorens id for den student, der vælges.
+	 * Hvis der sker en fejl, når SQL statmentet sendes til databasen, fanges fejlen ved en SQLException,
+	 * som printer en fejlmeddelelse.
 	 */
 	public static void updateMeetingModel(String student_id, String user_id, LocalDate meetingDate) {
 		Statement st = null;
