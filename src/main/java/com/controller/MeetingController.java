@@ -29,12 +29,12 @@ public class MeetingController implements Initializable {
         meetingModel.loadModel();
         ArrayList<String> studentList = meetingModel.getParticipatingStudent_id();
         ArrayList<Date> meeting_time = meetingModel.getMeetingTime();
-        String[] user_id = meetingModel.getParticipatingCoordinator().toArray(new String[0]);
+        ArrayList<String> user_id = meetingModel.getParticipatingCoordinator();
         ArrayList<String> meeting_location = meetingModel.getMeetingLocation();
 
         for (int i = 0; i < studentList.size(); i++) {
-            int readyForMeeting = Integer.parseInt(user_id[i]);
-            if (readyForMeeting != 0) {
+            String readyForMeeting = user_id.get(i);
+            if (readyForMeeting != "0") {
                 arranged_meetingList.add("ElevID: "+studentList.get(i)+"    møde dato: "+ meeting_time.get(i)+ "    lokation: "+meeting_location.get(i));
 
             } else {

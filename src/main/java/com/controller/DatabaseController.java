@@ -6,9 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 class DatabaseController {
-
 
 	static String dbAddress = "jdbc:mysql://212.10.146.182:3306/test?autoReconnect=true&useSSL=false";
 	static String dbUsername = "admin";
