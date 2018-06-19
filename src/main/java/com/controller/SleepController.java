@@ -157,13 +157,13 @@ public class SleepController implements Initializable {
                 } else if (diff[i-1] != 0) { // Tjekker om det er sovet, og hvis det er sandt, tilføjes data til series
                     float value = diff[i - 1];
                     value = value / 60;
-                    series.getData().add(new XYChart.Data<String, Number>("" + date_array[i - 1] + "", (Number) value ));
+                    series.getData().add(new XYChart.Data<String, Number>(date_array[i - 1], value ));
                 }
 
                 if (sleep_time.size() - 1 == i && diff[i] != 0) { // Hvis det er det sidste element i søvndata, og det ikke er nul, tilføjes data til series
                     float value = diff[i];
                     value = value / 60;
-                    series.getData().add(new XYChart.Data<String, Number>("" + date_array[i] + "", (Number) value));
+                    series.getData().add(new XYChart.Data<String, Number>(date_array[i], value));
                 }
             }
         }
