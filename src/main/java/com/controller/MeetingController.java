@@ -24,7 +24,15 @@ public class MeetingController implements Initializable {
     public DatePicker selectMeetingTime;
     public ListView potentialMeeting;
 
-
+    /**
+     * Metoden handleShowMeetings() starter med at kalde loadModel() fra klassen MeetingModel.
+     * Herefter defineres fire ArrayLists, ved studentList sættes data ind fra MeetingModel med metoden getParticipatingStudent_id.
+     * Dette gøres også ved de andre ArrayLists med getMeetingTime, getParticipatingCoordinator og getMeetingLocation.
+     * Herefter benyttes en for løkke, så kører igennem for antalet elever der ønsker møde.
+     * I for løkken er der en if løkke, hvor den er sand, hvis user_id ikke er lig med 0, hvilket betyder der er tildelt
+     * en sundhedskoordinator. Hvis dette er sandt, benyttes add til arranged_meetingList, som tilføjer eleven med student_id
+     * møde tidspunktet meeting_time og lokationen meeting_location.
+     */
     private void handleShowMeetings() {
         meetingModel.loadModel();
         ArrayList<String> studentList = meetingModel.getParticipatingStudent_id();
@@ -36,10 +44,7 @@ public class MeetingController implements Initializable {
             if (user_id.get(i) != "0") {
                 arranged_meetingList.add("ElevID: "+studentList.get(i)+"    møde dato: "+ meeting_time.get(i)+ "    lokation: "+meeting_location.get(i));
 
-            } else {
             }
-
-
         }
     }
 
