@@ -58,31 +58,29 @@ public class MeetingController implements Initializable {
         return date;
    }
 
-    private void handlePotentialMeeting() throws SQLException {
+    /**
+     *  Har til formål at skabe en list af elever som ønsker et møde.
+     *  Opretter to arrrays med oversigter over alle elever som har et møde, og alle SK'er som tilhøre det møde
+     */
+    private void handlePotentialMeeting() {
         meetingModel.loadModel();
         ArrayList<String> studentList = meetingModel.getParticipatingStudent_id();
-        String[] user_id = meetingModel.getParticipatingCoordinator().toArray(new String[0]);
+        ArrayList<String> user_id = meetingModel.getParticipatingCoordinator();
         for (int i = 0; i < studentList.size(); i++) {
-            int readyForMeeting = Integer.parseInt(user_id[i]);
-            if ( readyForMeeting == 0 ){
+            String readyForMeeting = user_id.get(i);
+            if ( readyForMeeting == "0" ){
                 meetingList.removeAll(meetingList);
                 meetingList.addAll(studentList.get(i));
                 elevList.getItems().addAll(meetingList);
-            }else {
-
             }
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
             potentialMeeting.setItems(arranged_meetingList);
             handleShowMeetings();
             handlePotentialMeeting();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public void handleReturn(){
